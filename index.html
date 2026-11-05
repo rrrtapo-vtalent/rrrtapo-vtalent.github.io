@@ -79,6 +79,8 @@ p { margin: 0 0 14px; }
 .inizio h1 { font-size: 64px; line-height: 1.02; letter-spacing: -.02em; }
 .tesi { font-size: 25px; line-height: 1.35; margin: 22px 0 30px; max-width: 18em; }
 .tesi em { color: var(--ledger); }
+.presenta { max-width: 31em; margin: -12px 0 30px; color: var(--soft); font-size: 17.5px; line-height: 1.55; }
+.presenta p { margin: 0 0 10px; }
 
 .registro {
   border: 1px solid var(--rule); border-radius: 6px; font-size: 18px;
@@ -185,8 +187,9 @@ p { margin: 0 0 14px; }
 
 /* la guida dentro il sito */
 .guida h2 { font-size: 30px; margin: 46px 0 12px; }
+.guida-testo > h2:first-child { margin-top: 0; }
 .guida h3 { font-size: 23px; margin: 30px 0 6px; }
-.guida > h3::before { content: ""; display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ledger); border-radius: 3px; margin-right: 10px; vertical-align: 1px; }
+.guida-testo > h3::before { content: ""; display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ledger); border-radius: 3px; margin-right: 10px; vertical-align: 1px; }
 .guida ul, .guida ol { padding-left: 1.2em; }
 .guida li { margin-bottom: 6px; }
 .guida code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 15px; background: var(--pale); border: 1px solid var(--rule); padding: 1px 6px; border-radius: 4px; }
@@ -264,8 +267,18 @@ html[lang="en"] [data-l="it"] { display: none !important; }
           <p class="occhiello" data-l="it">Amministrazione, finanza e controllo</p>
           <p class="occhiello" data-l="en">Administration, finance &amp; control</p>
           <h1 id="t-inizio">Mattia Porta</h1>
-          <p class="tesi" data-l="it">Tengo i conti del cantiere della Pedemontana. E costruisco <em>gli strumenti</em> per tenerli meglio.</p>
-          <p class="tesi" data-l="en">I keep the books for the Pedemontana motorway build. And I build <em>the tools</em> to keep them better.</p>
+          <p class="tesi" data-l="it">Lavoro in finanza e controllo, e costruisco con l'IA <em>gli strumenti</em> per farlo meglio.</p>
+          <p class="tesi" data-l="en">I work in finance and control, and I build <em>the tools</em> to do it better, with AI.</p>
+          <div class="presenta" data-l="it">
+            <p>Sono nell'area Amministrazione, Finanza e Controllo di Pedelombarda Nuova, il consorzio del gruppo Webuild che realizza l'autostrada Pedemontana Lombarda. Seguo in autonomia i leasing della società, dalla trattativa con banche e società di leasing fino al ciclo IFRS 16 di oltre cento contratti, e sviluppo il piano investimenti per budget e forecast: circa 570 cespiti. Ogni mese carico il gestionale su HFM per il consolidato di gruppo.</p>
+            <p>Mi interessa il punto in cui i numeri incontrano i sistemi. Gli strumenti che mi servono li costruisco con l'IA: io decido cosa devono fare e come si verifica che funzionino.</p>
+            <p>Laurea in Economics and Finance alla Bocconi, con un semestre alla Purdue University.</p>
+          </div>
+          <div class="presenta" data-l="en">
+            <p>I work in Administration, Finance and Control at Pedelombarda Nuova, the Webuild group consortium building the Pedemontana Lombarda motorway. I run the company's leasing on my own, from dealing with banks and leasing companies to the IFRS 16 cycle of more than a hundred contracts, and I build the capex plan for budget and forecast: around 570 assets. Every month I load the management accounts into HFM for group consolidation.</p>
+            <p>I like the point where numbers meet systems. I build the tools I need with AI: I decide what they have to do and how they are tested.</p>
+            <p>BSc in Economics and Finance at Bocconi University, with an exchange semester at Purdue University.</p>
+          </div>
           <div class="azioni">
             <a class="bottone pieno" href="#lavori"><span data-l="it">Guarda i lavori</span><span data-l="en">See my work</span></a>
             <a class="bottone" href="#contatti"><span data-l="it">Scrivimi</span><span data-l="en">Get in touch</span></a>
@@ -513,9 +526,9 @@ html[lang="en"] [data-l="it"] { display: none !important; }
       <h2 id="t-costruisci"><span data-l="it">Costruisci il tuo Jarvis</span><span data-l="en">Build your own Jarvis</span></h2>
       <p class="lead" data-l="it">Un kit di file da dare a Claude, uno alla volta. È lui a guidarti e a dirti, alla fine di ogni passo, quale file dargli dopo.</p>
       <p class="lead" data-l="en">A kit of files to hand to Claude, one at a time. It guides you, and at the end of each step it tells you which file comes next.</p>
-      <p class="nota-lingua" data-l="en">The kit and the guide below are in Italian for now.</p>
       <div class="dettaglio">
         <div class="corpo guida">
+<div class="guida-testo" data-l="it">
 <!-- GUIDA:INIZIO -->
 <p>Un assistente personale che si ricorda di te, delle tue cose e di come vuoi lavorare. Questa guida ti porta dall'inizio alla fine anche se non hai mai scritto una riga di codice: il lavoro tecnico lo fa Claude, tu segui i passi e prendi le decisioni.</p>
 <h2>Cosa stai per costruire</h2>
@@ -611,6 +624,104 @@ html[lang="en"] [data-l="it"] { display: none !important; }
 <hr />
 <p>Kit preparato da Mattia Porta, a partire dal suo assistente. Edizione novembre 2026.</p>
 <!-- GUIDA:FINE -->
+</div>
+<div class="guida-testo" data-l="en">
+<!-- GUIDE-EN:START -->
+<p>A personal assistant that remembers you, your things and how you like to work. This guide takes you from start to finish even if you've never written a line of code: Claude does the technical work, you follow the steps and make the decisions.</p>
+<h2>What you're about to build</h2>
+<p>On its own, Claude forgets everything at the end of each conversation. Your Jarvis doesn't, because it keeps its memory in a folder on your computer: plain text files it reads at the start of every session and updates as you work. Inside are its rules, your calendar, your ideas, the status of each project, a journal of what happens and a log of its mistakes.</p>
+<p>At the end you'll have:</p>
+<ul>
+<li>an assistant with the name, language and tone you choose;</li>
+<li>a calendar and an "inbox" to unload everything on your mind;</li>
+<li>a folder for each project, always saying where you've got to and what the next step is;</li>
+<li>a private backup on GitHub with the history of every change;</li>
+<li>if you want, reminders on your phone and an automatic check every night.</li>
+</ul>
+<h2>What you need</h2>
+<ul>
+<li>A computer, Mac or Windows.</li>
+<li>A Claude account on a paid plan, Pro or above: your Jarvis lives in the Code tab of the Claude desktop app, included in paid plans. Current pricing is at claude.com/pricing. With the free plan you can do the first part of the guide, not the second.</li>
+<li>An hour or two for the build, then a week of daily use, even five minutes a day.</li>
+</ul>
+<h2>How this kit works</h2>
+<ul>
+<li>The <code>steps/</code> folder holds eleven numbered files, from <code>00</code> to <code>10</code>. Each one contains Claude's instructions for one step of the build. <strong>You don't need to read them</strong>: you drag them into the chat, one at a time, and Claude knows what to do. At the end of each step, Claude tells you which file comes next.</li>
+<li>The <code>template/</code> folder holds the skeleton of your assistant's folder, with the files ready to be personalised.</li>
+<li>There's also this guide, to read or print, so you always know where you are.</li>
+</ul>
+<p>The build has two phases. In the <strong>first</strong>, you talk with Claude on the claude.ai website, which acts as your instructor. In the <strong>second</strong>, you talk with your new assistant, which finishes building itself together with you.</p>
+<h2>Phase 1 — On claude.ai, with Claude as instructor</h2>
+<h3>Step 00. Start here</h3>
+<p>Open claude.ai, start a new chat and drag in <code>00-start-here.md</code>. Claude explains the path and asks you four questions: which computer you use, which plan you have, how comfortable you are with files and folders, what you want your assistant to do for you.</p>
+<p><em>At the end:</em> you know what you need, and Claude knows your situation.</p>
+<h3>Step 01. How it works</h3>
+<p>Drag <code>01-how-it-works.md</code> into the same chat. Claude explains the six ideas everything rests on: why Claude doesn't remember, why the memory lives in text files, why rules are written once, why everything has one home, why the assistant must cite its sources and write down its mistakes, why every session has a beginning and an end.</p>
+<p><em>At the end:</em> you can explain in your own words why the files are needed.</p>
+<h3>Step 02. Prepare the computer</h3>
+<p>Drag in <code>02-prepare-the-computer.md</code>. This step is hands-on, one thing at a time:</p>
+<ol>
+<li>you activate the paid plan, if you don't have it;</li>
+<li>you install the <strong>Claude desktop app</strong> from claude.com/download and sign in with your account;</li>
+<li>you look at the app's <strong>Code</strong> tab: that's where your assistant will live;</li>
+<li>you create a folder with its name, for example <code>Jarvis</code>, in Documents. Better not in a folder synced by OneDrive, iCloud or Dropbox;</li>
+<li>you copy into it all the contents of the kit's <code>template</code> folder;</li>
+<li>if you like, you install <strong>Obsidian</strong> (free) to read the files comfortably.</li>
+</ol>
+<p><em>At the end:</em> the folder contains <code>CLAUDE.md</code>, <code>Calendar.md</code>, <code>Inbox.md</code>, <code>Ideas.md</code>, <code>Profile.md</code>, <code>Mistakes log.md</code> and the folders <code>Journal</code>, <code>Files</code>, <code>Projects</code>.</p>
+<h3>Step 03. Your tailored assistant</h3>
+<p>Drag in <code>03-your-tailored-assistant.md</code> <strong>together with</strong> the <code>CLAUDE.md</code> and <code>Profile.md</code> files from your folder. Claude interviews you: what to call the assistant, what it should call you, language, tone, who you are, which areas of your life it should look after, what it must never do, how you work best. Then it gives you back the two complete files: you open them, replace all the text, save.</p>
+<p><em>At the end:</em> <code>CLAUDE.md</code> has no placeholders left in double braces <code>{{ }}</code>.</p>
+<h3>Step 04. First launch</h3>
+<p>Drag in <code>04-first-launch.md</code>. Open the desktop app, <strong>Code</strong> tab, choose to work locally and open your assistant's folder. Type "Hi". Then run five checks:</p>
+<ol>
+<li><strong>it introduces itself</strong> with the name you chose;</li>
+<li><strong>it knows you</strong>: asked "what do you know about me?", it answers with your profile;</li>
+<li><strong>it doesn't make things up</strong>: asked about something you've never told it, it answers "I don't know";</li>
+<li><strong>it writes</strong>: if you ask it to put something in your calendar, you find it in the file;</li>
+<li><strong>it remembers</strong>: close the session, open a new one, and it still knows what's in the calendar.</li>
+</ol>
+<p><em>At the end:</em> your assistant is alive. From here on you drag the files into its chat, not into claude.ai any more.</p>
+<h2>Phase 2 — With your assistant</h2>
+<h3>Step 05. The first week</h3>
+<p>Drag <code>05-the-first-week.md</code> into your assistant's chat. It teaches you four habits, using them on real things: emptying your head into the inbox and sorting it; creating your first project with its status; closing the session; reopening it the next day without having to remember anything. Then for five to seven days you use it every day, even for a few minutes. Whenever something doesn't suit you, tell it: it suggests a new rule, and from then on the rule applies for good.</p>
+<h3>Step 06. The backup</h3>
+<p>Drag in <code>06-the-backup.md</code>. The assistant helps you create a GitHub account (free) and a <strong>private</strong> repository, and connects the folder to it with Git. From then on every change has a history, you can always go back, and if the computer breaks the memory isn't lost. If you prefer buttons to commands, you can use GitHub Desktop.</p>
+<p><em>At the end:</em> on GitHub you see your files, marked <strong>Private</strong>.</p>
+<h3>Step 07. The first review</h3>
+<p>After at least a week, drag in <code>07-the-first-review.md</code>. This is where the assistant really improves: you empty the inbox, look at what's overdue in the calendar and at stalled projects ("alive, dead or to be broken down?"), read the log of its mistakes and, for the ones that repeat, fix the rule that causes them. From then on, it suggests the review to you every week.</p>
+<p><em>At the end:</em> the basic build is finished.</p>
+<h2>Optional chapters</h2>
+<p>Whenever you like, in any order.</p>
+<h3>Step 08. Phone reminders</h3>
+<p>With the free <strong>ntfy</strong> app and a small script the computer runs on its own, appointments with a time reach you as a notification the day before and an hour before. It uses no AI and doesn't consume your plan. The computer needs to be on.</p>
+<h3>Step 09. The nightly check</h3>
+<p>Every night a script looks for forgotten things: past appointments still open, projects with an old status, rules that have grown too long, broken links. It fixes nothing: in the morning the assistant reads what it found and brings it to you.</p>
+<h3>Step 10. When projects grow</h3>
+<p>When there are many things going on, the folder splits into a <strong>headquarters</strong>, which looks after you, and <strong>offices</strong>, one for each big project, each with its own session and rules. They talk through a <strong>bridge</strong>: two files where the office writes its report and headquarters leaves requests. If you want, a <strong>wall</strong> stops each office from touching the others' files.</p>
+<h2>If something goes wrong</h2>
+<ul>
+<li>If the assistant answers like any other Claude, the <code>CLAUDE.md</code> file isn't in the folder you opened, or it has a different name (watch out for <code>CLAUDE.md.txt</code> on Windows). Check and reopen the session.</li>
+<li>If it can't find the files, you opened the wrong folder in the Code tab. Close the session and reopen it on the right folder.</li>
+<li>If it makes something up, tell it. It must write it in the mistakes log, with the cause. If it happens again, fix the rule in the review.</li>
+<li>If an app screen looks different from the guide, that's normal: apps change. Send Claude a screenshot and ask where the feature is.</li>
+<li>If you get stuck on a step, ask Claude to explain it more simply, or to break it into smaller steps. That's part of its job.</li>
+</ul>
+<h2>Useful words</h2>
+<ul>
+<li><strong><code>.md</code> file (Markdown).</strong> A plain text file, with a few symbols for headings and lists. It opens with any text program.</li>
+<li><strong><code>CLAUDE.md</code>.</strong> The file with your assistant's rules. Claude reads it on its own at every launch.</li>
+<li><strong>Session.</strong> A conversation with the assistant, from opening to "close session".</li>
+<li><strong>Inbox.</strong> Where you throw everything without thinking, to sort later.</li>
+<li><strong>Status.</strong> A project's file saying where you are and what the next step is. It gets rewritten, not lengthened.</li>
+<li><strong>Journal.</strong> The log: one line for each thing that happened.</li>
+<li><strong>Git and GitHub.</strong> Git keeps the history of every change; GitHub keeps a private copy of it online.</li>
+<li><strong>Hook.</strong> A small program Claude Code runs before every action, to check it.</li>
+</ul>
+<hr />
+<p>Kit prepared by Mattia Porta, based on his own assistant. November 2026 edition.</p>
+<!-- GUIDE-EN:END -->
+</div>
           <div class="chiusura">
             <div>
               <h3 data-l="it">Scarica il kit</h3><h3 data-l="en">Download the kit</h3>
@@ -618,8 +729,8 @@ html[lang="en"] [data-l="it"] { display: none !important; }
               <p data-l="en">The folder with the steps for Claude, your assistant's template and this guide, also as a printable PDF.</p>
             </div>
             <div class="azioni">
-              <a class="bottone verde" href="kit-jarvis.zip" download><span data-l="it">Scarica il kit (.zip)</span><span data-l="en">Download the kit (.zip)</span></a>
-              <a class="bottone" href="costruisci-il-tuo-jarvis.pdf"><span data-l="it">Guida in PDF</span><span data-l="en">Guide as PDF</span></a>
+              <a class="bottone verde" href="kit-jarvis.zip" download data-l="it">Scarica il kit (.zip)</a><a class="bottone verde" href="jarvis-kit.zip" download data-l="en">Download the kit (.zip)</a>
+              <a class="bottone" href="costruisci-il-tuo-jarvis.pdf" data-l="it">Guida in PDF</a><a class="bottone" href="build-your-own-jarvis.pdf" data-l="en">Guide as PDF</a>
             </div>
           </div>
         </div>
@@ -632,8 +743,8 @@ html[lang="en"] [data-l="it"] { display: none !important; }
             <dt data-l="it">Tempo</dt><dt data-l="en">Time</dt>
             <dd data-l="it">Un'ora o due, poi una settimana d'uso</dd><dd data-l="en">An hour or two, then a week of use</dd>
           </dl>
-          <a class="bottone verde" href="kit-jarvis.zip" download><span data-l="it">Scarica il kit (.zip)</span><span data-l="en">Download the kit (.zip)</span></a>
-          <a class="bottone" href="costruisci-il-tuo-jarvis.pdf"><span data-l="it">Guida in PDF</span><span data-l="en">Guide as PDF</span></a>
+          <a class="bottone verde" href="kit-jarvis.zip" download data-l="it">Scarica il kit (.zip)</a><a class="bottone verde" href="jarvis-kit.zip" download data-l="en">Download the kit (.zip)</a>
+          <a class="bottone" href="costruisci-il-tuo-jarvis.pdf" data-l="it">Guida in PDF</a><a class="bottone" href="build-your-own-jarvis.pdf" data-l="en">Guide as PDF</a>
         </aside>
       </div>
     </section>
