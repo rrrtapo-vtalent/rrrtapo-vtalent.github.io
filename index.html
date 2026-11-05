@@ -16,6 +16,7 @@
   --ink: #15191A;       /* inchiostro */
   --soft: #5B6461;      /* testo secondario */
   --ledger: #1F4D3A;    /* verde registro */
+  --pale: #F1F5F2;      /* verde chiarissimo per i riquadri */
   --rule: #D5E0D8;      /* righe della carta a colonne */
   --tab: #D3DAD4;       /* linguette chiuse */
   --serif: "EB Garamond", Garamond, "Times New Roman", serif;
@@ -30,18 +31,14 @@ body {
 a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 :focus-visible { outline: 2px solid var(--ledger); outline-offset: 3px; border-radius: 2px; }
 
-.wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 64px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 64px; }
 
-/* testata sopra il raccoglitore */
 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
 .marchio { font-family: var(--sans); font-size: 13px; letter-spacing: .08em; color: var(--soft); text-decoration: none; }
 .lingua { font-family: var(--sans); font-size: 13px; display: flex; gap: 2px; }
-.lingua button {
-  font: inherit; border: 0; background: transparent; color: var(--soft); padding: 6px 10px; border-radius: 20px; cursor: pointer;
-}
+.lingua button { font: inherit; border: 0; background: transparent; color: var(--soft); padding: 6px 10px; border-radius: 20px; cursor: pointer; }
 .lingua button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
 
-/* linguette */
 nav.linguette { display: flex; gap: 4px; padding-left: 18px; overflow-x: auto; scrollbar-width: none; }
 nav.linguette::-webkit-scrollbar { display: none; }
 nav.linguette a {
@@ -52,45 +49,42 @@ nav.linguette a {
 nav.linguette a:hover { transform: translateY(1px); color: var(--ink); }
 nav.linguette a[aria-current="page"] { background: var(--sheet); color: var(--ink); transform: none; font-weight: 600; }
 
-/* il foglio */
 .foglio {
   background: var(--sheet); border-radius: 4px 14px 14px 14px; min-height: 500px;
   box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 40px -22px rgba(21,25,26,.35);
-  position: relative; overflow: hidden;
+  position: relative;
 }
 .sezione { display: none; padding: 56px 64px 64px; animation: entra .35s ease both; }
 .sezione.attiva { display: block; }
 @keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 .occhiello { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); margin: 0 0 14px; }
-h1, h2, h3 { font-weight: 500; margin: 0; }
+h1, h2, h3, h4 { font-weight: 500; margin: 0; }
 h2 { font-size: 40px; line-height: 1.1; letter-spacing: -.01em; }
-.lead { font-size: 22px; color: var(--ink); max-width: 34em; margin: 18px 0 0; }
+.lead { font-size: 23px; line-height: 1.45; max-width: 32em; margin: 18px 0 0; }
 p { margin: 0 0 14px; }
+
+.bottone {
+  display: inline-block; font-family: var(--sans); font-size: 15px; text-decoration: none; padding: 12px 20px; border-radius: 999px;
+  border: 1px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; transition: background .15s, color .15s, border-color .15s;
+}
+.bottone.pieno { background: var(--ink); color: var(--sheet); }
+.bottone.verde { background: var(--ledger); border-color: var(--ledger); color: var(--sheet); }
+.bottone:hover { background: var(--ledger); border-color: var(--ledger); color: var(--sheet); }
+.bottone.verde:hover { background: var(--ink); border-color: var(--ink); }
+.azioni { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ---------- inizio ---------- */
 .inizio { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
 .inizio h1 { font-size: 64px; line-height: 1.02; letter-spacing: -.02em; }
 .tesi { font-size: 25px; line-height: 1.35; margin: 22px 0 30px; max-width: 18em; }
 .tesi em { color: var(--ledger); }
-.azioni { display: flex; gap: 12px; flex-wrap: wrap; }
-.bottone {
-  font-family: var(--sans); font-size: 15px; text-decoration: none; padding: 12px 20px; border-radius: 999px;
-  border: 1px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; transition: background .15s, color .15s;
-}
-.bottone.pieno { background: var(--ink); color: var(--sheet); }
-.bottone:hover { background: var(--ledger); border-color: var(--ledger); color: var(--sheet); }
 
-/* il registro: carta a colonne */
 .registro {
-  border: 1px solid var(--rule); border-radius: 6px; background:
-    linear-gradient(to right, transparent calc(62% - 1px), var(--rule) calc(62% - 1px), var(--rule) 62%, transparent 62%),
-    var(--sheet);
-  font-size: 18px;
+  border: 1px solid var(--rule); border-radius: 6px; font-size: 18px;
+  background: linear-gradient(to right, transparent calc(62% - 1px), var(--rule) calc(62% - 1px), var(--rule) 62%, transparent 62%), var(--sheet);
 }
-.registro .intest, .registro .riga {
-  display: grid; grid-template-columns: 62% 38%; border-bottom: 1px solid var(--rule);
-}
+.registro .intest, .registro .riga { display: grid; grid-template-columns: 62% 38%; border-bottom: 1px solid var(--rule); }
 .registro .intest span { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); padding: 12px 16px 10px; }
 .registro .riga span { padding: 11px 16px; }
 .registro .riga .con { font-family: var(--sans); font-size: 14px; color: var(--soft); align-self: center; }
@@ -105,51 +99,108 @@ p { margin: 0 0 14px; }
 .registro .riga.ia .voce { color: var(--ledger); font-style: italic; }
 .didascalia { font-family: var(--sans); font-size: 12px; color: var(--soft); margin-top: 10px; }
 
-/* ---------- lavori ---------- */
+/* ---------- lavori: elenco ---------- */
 .schede { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 36px; }
 .scheda {
-  display: block; text-decoration: none; color: var(--ink); border: 1px solid var(--rule); border-radius: 10px;
-  padding: 26px 26px 22px; background: var(--sheet); position: relative; transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+  display: flex; flex-direction: column; text-decoration: none; color: var(--ink); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 28px 28px 24px; background: var(--sheet); transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
 }
 .scheda:hover { transform: translateY(-3px); border-color: var(--ledger); box-shadow: 0 14px 30px -20px rgba(31,77,58,.6); }
 .scheda .tipo { font-family: var(--sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ledger); }
-.scheda h3 { font-size: 30px; margin: 10px 0 8px; line-height: 1.15; }
-.scheda p { color: var(--soft); font-size: 18px; }
-.scheda .apri { font-family: var(--sans); font-size: 14px; color: var(--ink); display: inline-flex; gap: 6px; align-items: center; }
+.scheda h3 { font-size: 31px; margin: 10px 0 10px; line-height: 1.12; }
+.scheda .gancio { font-size: 21px; line-height: 1.35; margin-bottom: 12px; }
+.scheda p.cosa { color: var(--soft); font-size: 18px; flex: 1; }
+.scheda .apri { font-family: var(--sans); font-size: 14px; display: inline-flex; gap: 6px; align-items: center; margin-top: 8px; }
 .scheda .apri::after { content: "→"; transition: transform .18s; }
 .scheda:hover .apri::after { transform: translateX(4px); }
 
-/* dettaglio di un lavoro */
+/* ---------- pagine di dettaglio ---------- */
 .indietro { font-family: var(--sans); font-size: 14px; text-decoration: none; color: var(--soft); display: inline-block; margin-bottom: 26px; }
 .indietro:hover { color: var(--ink); }
-.dettaglio { display: grid; grid-template-columns: 1fr 260px; gap: 56px; margin-top: 30px; }
-.dettaglio .corpo p { max-width: 36em; }
-.dettaglio .corpo p:has(.bottone) { margin-top: 26px; }
-.scheda-tecnica { border-left: 2px solid var(--ledger); padding-left: 20px; font-family: var(--sans); font-size: 14px; color: var(--soft); align-self: start; }
+.dettaglio { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 64px; margin-top: 34px; }
+.corpo { max-width: 40em; }
+.corpo h3 { font-size: 29px; margin: 48px 0 12px; line-height: 1.15; }
+.corpo h3:first-child { margin-top: 0; }
+.corpo h4 { font-size: 22px; margin: 26px 0 6px; }
+.corpo ul { padding-left: 1.1em; margin: 0 0 14px; }
+.corpo li { margin-bottom: 8px; }
+.laterale { align-self: start; position: sticky; top: 24px; }
+.scheda-tecnica { border-left: 2px solid var(--ledger); padding-left: 20px; font-family: var(--sans); font-size: 14px; color: var(--soft); margin: 0 0 24px; }
 .scheda-tecnica dt { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); margin-top: 16px; }
 .scheda-tecnica dt:first-child { margin-top: 0; }
 .scheda-tecnica dd { margin: 4px 0 0; color: var(--ink); }
+.laterale .bottone { width: 100%; text-align: center; margin-bottom: 10px; }
 
-/* il ciclo di Jarvis */
-.ciclo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 26px 0 30px; font-family: var(--sans); font-size: 14px; }
-.ciclo span.passo { border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px; background: #F3F6F3; }
-.ciclo span.freccia { color: var(--ledger); }
+.chiusura {
+  margin-top: 56px; padding: 32px 36px; border-radius: 12px; background: var(--pale); border: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap;
+}
+.chiusura h3 { font-size: 27px; margin: 0 0 6px; }
+.chiusura p { margin: 0; color: var(--soft); max-width: 30em; }
 
-/* ---------- percorso ---------- */
-.tappe { margin-top: 36px; border-left: 2px solid var(--rule); padding-left: 28px; }
-.tappa { position: relative; padding-bottom: 30px; }
+/* il ciclo di una sessione */
+.ciclo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 8px; font-family: var(--sans); font-size: 14px; }
+.ciclo .passo { border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px; background: var(--pale); }
+.ciclo .freccia { color: var(--ledger); }
+
+/* la mappa di Jarvis */
+.mappa { margin: 22px 0 18px; font-family: var(--sans); font-size: 14px; }
+.mappa .strato { border-radius: 10px; padding: 14px 18px; }
+.mappa .etichetta { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); display: block; margin-bottom: 4px; }
+.mappa .costituzione { border: 1px solid var(--ledger); background: var(--sheet); }
+.mappa .sede { background: var(--ledger); color: var(--sheet); margin-top: 10px; }
+.mappa .sede .etichetta { color: #BFD6C8; }
+.mappa .ponte { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0; }
+.mappa .ponte i { font-style: normal; }
+.mappa .ponte span { text-align: center; color: var(--ledger); font-size: 12px; padding: 6px 0; border-left: 1px dashed var(--ledger); border-right: 1px dashed var(--ledger); margin: 0 28%; }
+.mappa .uffici { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.mappa .ufficio { border: 1.5px dashed var(--soft); border-radius: 10px; padding: 12px 12px; background: var(--sheet); min-height: 74px; }
+.mappa .ufficio b { display: block; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.mappa .ufficio small { color: var(--soft); font-size: 12px; }
+.mappa .legenda { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 10px; font-size: 12px; color: var(--soft); }
+.mappa .legenda i { display: inline-block; width: 18px; height: 10px; border: 1.5px dashed var(--soft); border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+/* principi */
+.principi { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0 8px; }
+.principio { border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; }
+.principio h4 { margin: 0 0 6px; font-size: 21px; }
+.principio p { font-size: 17.5px; color: var(--soft); margin: 0; line-height: 1.5; }
+
+/* storia e percorso: linea del tempo */
+.tappe { margin-top: 22px; border-left: 2px solid var(--rule); padding-left: 28px; }
+.tappa { position: relative; padding-bottom: 26px; }
 .tappa::before { content: ""; position: absolute; left: -36px; top: 10px; width: 12px; height: 12px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--ledger); }
-.tappa:first-child::before { background: var(--ledger); }
+.tappa.oggi::before { background: var(--ledger); }
 .tappa .quando { font-family: var(--sans); font-size: 13px; color: var(--soft); }
-.tappa h3 { font-size: 26px; margin: 2px 0 2px; }
+.tappa h3, .tappa h4 { font-size: 24px; margin: 2px 0 4px; }
 .tappa .dove { font-style: italic; color: var(--soft); margin-bottom: 8px; }
 .tappa p { max-width: 36em; }
+
+/* indice del manuale */
+.parti { margin: 18px 0 8px; border-top: 1px solid var(--rule); }
+.parte { display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.parte .num { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); padding-top: 6px; }
+.parte h4 { margin: 0 0 4px; font-size: 21px; }
+.parte p { margin: 0; color: var(--soft); font-size: 17.5px; }
+
+/* la guida dentro il sito */
+.guida h2 { font-size: 30px; margin: 46px 0 12px; }
+.guida h3 { font-size: 23px; margin: 30px 0 6px; }
+.guida > h3::before { content: ""; display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ledger); border-radius: 3px; margin-right: 10px; vertical-align: 1px; }
+.guida ul, .guida ol { padding-left: 1.2em; }
+.guida li { margin-bottom: 6px; }
+.guida code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 15px; background: var(--pale); border: 1px solid var(--rule); padding: 1px 6px; border-radius: 4px; }
+.guida em { color: var(--ledger); }
+.guida hr { border: 0; border-top: 1px solid var(--rule); margin: 40px 0 16px; }
+.nota-lingua { font-family: var(--sans); font-size: 14px; color: var(--soft); background: var(--pale); border-radius: 8px; padding: 12px 16px; margin: 24px 0 0; }
+
+/* percorso */
 .attrezzi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 10px; padding-top: 28px; border-top: 1px solid var(--rule); }
 .attrezzi h3 { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); font-weight: 400; margin-bottom: 10px; }
 .etichette { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--sans); font-size: 14px; }
 .etichette span { border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; }
 
-/* ---------- contatti ---------- */
+/* contatti */
 .contatti-griglia { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 36px; max-width: 760px; }
 .contatto { border: 1px solid var(--rule); border-radius: 10px; padding: 24px; }
 .contatto .tipo { font-family: var(--sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ledger); }
@@ -159,21 +210,26 @@ p { margin: 0 0 14px; }
 
 footer { font-family: var(--sans); font-size: 12px; color: var(--soft); text-align: center; margin-top: 22px; }
 
-[data-l="en"] { display: none !important; }
+html:not([lang="en"]) [data-l="en"] { display: none !important; }
 html[lang="en"] [data-l="it"] { display: none !important; }
-html[lang="en"] [data-l="en"] { display: revert !important; }
 
-@media (max-width: 820px) {
+@media (max-width: 860px) {
   .wrap { padding: 20px 12px 40px; }
   .sezione { padding: 34px 22px 40px; }
-  .inizio, .dettaglio, .contatti-griglia, .attrezzi { grid-template-columns: 1fr; gap: 32px; }
+  .inizio, .dettaglio, .contatti-griglia, .attrezzi, .principi { grid-template-columns: 1fr; gap: 28px; }
+  .laterale { position: static; order: -1; }
   .inizio h1 { font-size: 46px; }
   .tesi { font-size: 22px; }
   h2 { font-size: 32px; }
+  .lead { font-size: 21px; }
   .schede { grid-template-columns: 1fr; }
+  .mappa .uffici, .mappa .ponte { grid-template-columns: 1fr 1fr; }
+  .mappa .ponte span:nth-child(n+3) { display: none; }
+  .parte { grid-template-columns: 1fr; gap: 2px; }
   nav.linguette { padding-left: 6px; }
   nav.linguette a { padding: 10px 14px 8px; font-size: 13px; }
   .foglio { border-radius: 4px 4px 12px 12px; }
+  .chiusura { padding: 24px; }
   body { font-size: 19px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -201,7 +257,7 @@ html[lang="en"] [data-l="en"] { display: revert !important; }
 
   <main class="foglio">
 
-    <!-- INIZIO -->
+    <!-- ============ INIZIO ============ -->
     <section class="sezione" id="sez-inizio" aria-labelledby="t-inizio">
       <div class="inizio">
         <div>
@@ -229,113 +285,443 @@ html[lang="en"] [data-l="en"] { display: revert !important; }
       </div>
     </section>
 
-    <!-- LAVORI -->
+    <!-- ============ LAVORI ============ -->
     <section class="sezione" id="sez-lavori" aria-labelledby="t-lavori">
       <p class="occhiello" data-l="it">Lavori finiti</p>
       <p class="occhiello" data-l="en">Finished work</p>
       <h2 id="t-lavori"><span data-l="it">Cosa ho costruito</span><span data-l="en">What I've built</span></h2>
       <div class="schede">
         <a class="scheda" href="#lavori/jarvis">
-          <span class="tipo" data-l="it">Assistente AI</span><span class="tipo" data-l="en">AI assistant</span>
+          <span class="tipo" data-l="it">Assistente AI, dal 2026</span><span class="tipo" data-l="en">AI assistant, since 2026</span>
           <h3>Jarvis</h3>
-          <p data-l="it">Un assistente con memoria che non dimentica tra una conversazione e l'altra. Lo uso ogni giorno.</p>
-          <p data-l="en">An assistant with a memory that carries over from one conversation to the next. I use it every day.</p>
+          <p class="gancio" data-l="it">Claude dimentica tutto a fine conversazione. Jarvis no: la sua memoria è una cartella di file che legge e riscrive a ogni sessione.</p>
+          <p class="gancio" data-l="en">Claude forgets everything when a conversation ends. Jarvis doesn't: its memory is a folder of files it reads and rewrites in every session.</p>
+          <p class="cosa" data-l="it">Una sede che tiene la mia vita e quattro uffici separati da un muro, regole scritte come specifiche, nessun fatto senza fonte, ogni errore trasformato in una regola. Lo uso ogni giorno. Con il kit per costruirtene uno.</p>
+          <p class="cosa" data-l="en">A head office that runs my life and four offices kept apart by a wall, rules written as specifications, no fact without a source, every mistake turned into a rule. I use it every day. With a kit to build your own.</p>
           <span class="apri"><span data-l="it">Come funziona</span><span data-l="en">How it works</span></span>
         </a>
         <a class="scheda" href="#lavori/manuale">
-          <span class="tipo" data-l="it">Manuale, PDF</span><span class="tipo" data-l="en">Handbook, PDF</span>
+          <span class="tipo" data-l="it">Manuale, 41 pagine</span><span class="tipo" data-l="en">Handbook, 41 pages</span>
           <h3><span data-l="it">Il leasing in IFRS 16 e OIC</span><span data-l="en">Leases under IFRS 16 and OIC</span></h3>
-          <p data-l="it">Tutto il ciclo del leasing lato locatario, dalla firma all'ultimo ammortamento.</p>
-          <p data-l="en">The lessee's full lease cycle, from signing to the last depreciation charge.</p>
+          <p class="gancio" data-l="it">Lo stesso contratto, due bilanci diversi. Un macchinario seguito dalla firma al riscatto, con ogni scrittura in partita doppia.</p>
+          <p class="gancio" data-l="en">One contract, two different sets of accounts. A machine followed from signing to purchase option, with every journal entry.</p>
+          <p class="cosa" data-l="it">IFRS 16 e principi italiani a confronto, rideterminazioni ISTAT ed Euribor, modifiche e risoluzioni, sale and leaseback, fiscalità. Nato dal ciclo che gestisco ogni giorno in azienda.</p>
+          <p class="cosa" data-l="en">IFRS 16 and Italian GAAP side by side, CPI and Euribor remeasurements, modifications and early termination, sale and leaseback, tax. Born from the cycle I run every day at work.</p>
           <span class="apri"><span data-l="it">Leggi e scarica</span><span data-l="en">Read and download</span></span>
         </a>
       </div>
     </section>
 
-    <!-- JARVIS -->
+    <!-- ============ JARVIS ============ -->
     <section class="sezione" id="sez-lavori/jarvis" aria-labelledby="t-jarvis">
       <a class="indietro" href="#lavori"><span data-l="it">← Tutti i lavori</span><span data-l="en">← All work</span></a>
-      <p class="occhiello" data-l="it">Assistente AI, 2026</p>
-      <p class="occhiello" data-l="en">AI assistant, 2026</p>
+      <p class="occhiello" data-l="it">Assistente AI, dal 2026</p>
+      <p class="occhiello" data-l="en">AI assistant, since 2026</p>
       <h2 id="t-jarvis">Jarvis</h2>
-      <p class="lead" data-l="it">Un modello di linguaggio dimentica tutto tra una conversazione e l'altra. Jarvis no.</p>
-      <p class="lead" data-l="en">A language model forgets everything between one conversation and the next. Jarvis doesn't.</p>
-      <div class="ciclo" aria-label="Il ciclo di una sessione">
-        <span class="passo" data-l="it">Legge regole e stato</span><span class="passo" data-l="en">Reads rules and status</span>
-        <span class="freccia">→</span>
-        <span class="passo" data-l="it">Lavora con me</span><span class="passo" data-l="en">Works with me</span>
-        <span class="freccia">→</span>
-        <span class="passo" data-l="it">Scrive cosa è cambiato</span><span class="passo" data-l="en">Writes down what changed</span>
-        <span class="freccia">→</span>
-        <span class="passo" data-l="it">Salva su Git</span><span class="passo" data-l="en">Commits to Git</span>
-      </div>
+      <p class="lead" data-l="it">Un modello di linguaggio dimentica tutto tra una conversazione e l'altra. Jarvis è il modo in cui l'ho fatto ricordare: una memoria scritta, regole precise e la disciplina di non inventare niente.</p>
+      <p class="lead" data-l="en">A language model forgets everything between one conversation and the next. Jarvis is how I made it remember: a written memory, precise rules and the discipline of never making things up.</p>
+
       <div class="dettaglio">
         <div class="corpo">
+
+          <h3 data-l="it">Il problema</h3><h3 data-l="en">The problem</h3>
           <div data-l="it">
-            <p>Jarvis è un agente Claude Code che lavora su una base di conoscenza in file di testo, versionata con Git. Agenda, decisioni e stato dei progetti vengono scritti man mano, così ogni sessione riparte da dove si era rimasti.</p>
-            <p>Le regole di comportamento sono scritte come specifiche e valgono in ogni sessione: ogni fatto deve avere una fonte, ogni errore finisce in un registro. Automazioni locali girano anche quando non ci sono: promemoria, controlli notturni, ripetizione spaziata per lo studio.</p>
-            <p>L'ho esteso a un collega, con un'istanza propria su uno spazio di lavoro condiviso.</p>
+            <p>Lavoro, studio, due progetti software, la casa, l'agenda: troppe cose aperte per tenerle tutte in testa. Claude è bravissimo a ragionare, ma ogni conversazione riparte da zero, e riassumergli ogni volta dove eravamo rimasti costa più tempo di quanto ne fa risparmiare.</p>
+            <p>Mi serviva un collaboratore che si ricordasse di tutto, che sapesse sempre dove eravamo arrivati, e di cui potermi fidare: che non inventasse un numero o una scadenza per sembrare sicuro.</p>
           </div>
           <div data-l="en">
-            <p>Jarvis is a Claude Code agent working on a plain-text knowledge base versioned with Git. Calendar, decisions and project status are written down as work goes on, so every session picks up where the last one stopped.</p>
-            <p>Its operating rules are written as specifications and apply in every session: every fact needs a source, every mistake goes into a log. Local automations run even when I'm away: reminders, nightly checks, spaced repetition for study.</p>
-            <p>I extended it to a colleague, with a separate instance on a shared workspace.</p>
+            <p>Work, study, two software projects, the house, the calendar: too many open fronts to keep in my head. Claude reasons very well, but every conversation starts from scratch, and briefing it each time on where we left off costs more time than it saves.</p>
+            <p>I needed a collaborator that remembered everything, always knew where we stood, and that I could trust: one that would never invent a number or a deadline just to sound confident.</p>
+          </div>
+
+          <h3 data-l="it">Com'è fatto</h3><h3 data-l="en">How it's built</h3>
+          <div data-l="it">
+            <p>Jarvis è un agente Claude Code che lavora su una cartella di file di testo, versionata con Git. Oggi è organizzato come un'azienda piccola.</p>
+          </div>
+          <div data-l="en">
+            <p>Jarvis is a Claude Code agent working on a folder of plain-text files, versioned with Git. Today it is organised like a small company.</p>
+          </div>
+          <div class="mappa" aria-label="Struttura di Jarvis">
+            <div class="strato costituzione">
+              <span class="etichetta" data-l="it">Costituzione</span><span class="etichetta" data-l="en">Constitution</span>
+              <span data-l="it">Le regole comuni a tutte le scrivanie: verità, fonti, memoria, come si apre e si chiude una sessione</span>
+              <span data-l="en">Rules shared by every desk: truth, sources, memory, how a session opens and closes</span>
+            </div>
+            <div class="strato sede">
+              <span class="etichetta" data-l="it">La sede</span><span class="etichetta" data-l="en">Head office</span>
+              <span data-l="it">Agenda, inbox, idee, vita personale, carriera. Degli uffici vede solo i resoconti.</span>
+              <span data-l="en">Calendar, inbox, ideas, personal life, career. It only sees the offices' reports.</span>
+            </div>
+            <div class="ponte" aria-hidden="true"><span><i data-l="it">ponte</i><i data-l="en">bridge</i></span><span><i data-l="it">ponte</i><i data-l="en">bridge</i></span><span><i data-l="it">ponte</i><i data-l="en">bridge</i></span><span><i data-l="it">ponte</i><i data-l="en">bridge</i></span></div>
+            <div class="uffici">
+              <div class="ufficio"><b data-l="it">Lavoro</b><b data-l="en">Work</b><small data-l="it">contabilità e app AFC</small><small data-l="en">accounting and the AFC app</small></div>
+              <div class="ufficio"><b data-l="it">Studio</b><b data-l="en">Study</b><small data-l="it">percorso e flashcard</small><small data-l="en">curriculum and flashcards</small></div>
+              <div class="ufficio"><b data-l="it">Progetto A</b><b data-l="en">Project A</b><small data-l="it">software</small><small data-l="en">software</small></div>
+              <div class="ufficio"><b data-l="it">Progetto B</b><b data-l="en">Project B</b><small data-l="it">software</small><small data-l="en">software</small></div>
+            </div>
+            <div class="legenda"><span><i></i><span data-l="it">il muro: ogni ufficio vede solo i suoi file</span><span data-l="en">the wall: each office sees only its own files</span></span></div>
+          </div>
+          <div data-l="it">
+            <ul>
+              <li><strong>La sede</strong> tiene me: agenda, idee, vita personale, carriera. Dei progetti non sa i dettagli, solo a che punto sono.</li>
+              <li><strong>Gli uffici</strong> sono sessioni separate, una per ogni fronte grande, ognuna con le sue regole. Ogni ufficio fa solo il suo lavoro: meno contesto, risposte migliori.</li>
+              <li><strong>Il ponte</strong> è l'unico punto di contatto: a ogni chiusura l'ufficio scrive un resoconto per la sede, e la sede gli lascia le richieste.</li>
+              <li><strong>Il muro</strong> è un controllo automatico che parte prima di ogni azione: blocca qualsiasi lettura o scrittura fuori dalla scrivania. Ferma solo l'accesso vero ai file altrui, mai il lavoro.</li>
+            </ul>
+            <p>Dentro ogni scrivania e ogni progetto ci sono sempre gli stessi file: <em>CLAUDE.md</em> con le regole, <em>Stato.md</em> che dice dove siamo e da dove si riparte, <em>Diario.md</em> con la cronaca, <em>Registro errori.md</em>.</p>
+          </div>
+          <div data-l="en">
+            <ul>
+              <li><strong>The head office</strong> looks after me: calendar, ideas, personal life, career. It doesn't know project details, only where each project stands.</li>
+              <li><strong>The offices</strong> are separate sessions, one for each large front, each with its own rules. Each office does only its own job: less context, better answers.</li>
+              <li><strong>The bridge</strong> is the only point of contact: at every close, the office writes a report for the head office, and the head office leaves it requests.</li>
+              <li><strong>The wall</strong> is an automatic check that runs before every action: it blocks any read or write outside the desk. It stops only real access to other desks' files, never the work.</li>
+            </ul>
+            <p>Every desk and every project holds the same files: <em>CLAUDE.md</em> with the rules, <em>Stato.md</em> saying where things stand, <em>Diario.md</em> as the log, and an error register.</p>
+          </div>
+
+          <h4 data-l="it">Una sessione</h4><h4 data-l="en">A session</h4>
+          <div class="ciclo" aria-label="Il ciclo di una sessione">
+            <span class="passo" data-l="it">Legge regole e stato</span><span class="passo" data-l="en">Reads rules and status</span>
+            <span class="freccia">→</span>
+            <span class="passo" data-l="it">Lavora con me</span><span class="passo" data-l="en">Works with me</span>
+            <span class="freccia">→</span>
+            <span class="passo" data-l="it">Scrive man mano</span><span class="passo" data-l="en">Writes as it goes</span>
+            <span class="freccia">→</span>
+            <span class="passo" data-l="it">Riscrive lo stato</span><span class="passo" data-l="en">Rewrites the status</span>
+            <span class="freccia">→</span>
+            <span class="passo" data-l="it">Salva su Git</span><span class="passo" data-l="en">Commits to Git</span>
+          </div>
+
+          <h3 data-l="it">Perché funziona</h3><h3 data-l="en">Why it works</h3>
+          <div class="principi">
+            <div class="principio">
+              <h4 data-l="it">Se non è scritto, non esiste</h4><h4 data-l="en">If it isn't written, it doesn't exist</h4>
+              <p data-l="it">La memoria non sta nel modello ma in file di testo semplice. Si scrive man mano, mai solo alla fine: una sessione che si interrompe non perde niente.</p>
+              <p data-l="en">Memory lives in plain-text files, not in the model. It is written as work goes on, never only at the end: an interrupted session loses nothing.</p>
+            </div>
+            <div class="principio">
+              <h4 data-l="it">Regole come specifiche</h4><h4 data-l="en">Rules as specifications</h4>
+              <p data-l="it">Ogni regola decisa va subito nel file giusto e vale in ogni sessione. Le regole si riscrivono, non si accodano: niente contraddizioni che si accumulano.</p>
+              <p data-l="en">Every rule agreed goes straight into the right file and applies in every session. Rules are rewritten, not appended: no contradictions piling up.</p>
+            </div>
+            <div class="principio">
+              <h4 data-l="it">Una cosa, un posto</h4><h4 data-l="en">One thing, one place</h4>
+              <p data-l="it">Ogni fatto ha una casa sola, altrove solo un collegamento. Lo stato di un progetto vive solo nel suo Stato: chi lo legge sa dove siamo, senza cercare.</p>
+              <p data-l="en">Every fact has a single home, with links everywhere else. A project's status lives only in its Stato file: whoever reads it knows where things stand.</p>
+            </div>
+            <div class="principio">
+              <h4 data-l="it">Nessun fatto senza fonte</h4><h4 data-l="en">No fact without a source</h4>
+              <p data-l="it">Ogni numero viene da un dato appena letto; norme e prezzi si verificano sul web con la data. Prima di dire "fatto" si controlla lo stato reale, e una verifica vale solo se poteva fallire.</p>
+              <p data-l="en">Every number comes from data just read; rules and prices are checked online, with a date. Before saying "done" it checks the real state, and a check only counts if it could have failed.</p>
+            </div>
+            <div class="principio">
+              <h4 data-l="it">Gli errori diventano regole</h4><h4 data-l="en">Mistakes become rules</h4>
+              <p data-l="it">Ogni errore finisce in un registro con la sua causa vera. Nella review settimanale quelli che si ripetono correggono la struttura, non una promessa di stare più attenti.</p>
+              <p data-l="en">Every mistake goes into a register with its real cause. In the weekly review, the recurring ones fix the structure, not a promise to be more careful.</p>
+            </div>
+            <div class="principio">
+              <h4 data-l="it">Contesto piccolo, risposte migliori</h4><h4 data-l="en">Small context, better answers</h4>
+              <p data-l="it">Ogni scrivania legge solo ciò che le serve. Regole corte, con un tetto di parole, e diari che si archiviano ogni tre mesi.</p>
+              <p data-l="en">Each desk reads only what it needs. Short rules with a word cap, and logs archived every three months.</p>
+            </div>
+          </div>
+
+          <h3 data-l="it">Cosa fa da solo</h3><h3 data-l="en">What it does on its own</h3>
+          <div data-l="it">
+            <ul>
+              <li>Un appuntamento con l'ora in agenda accende una notifica sul telefono il giorno prima e circa un'ora prima, senza passare dall'IA.</li>
+              <li>Ogni notte un controllo cerca scadenze passate, stati vecchi, regole troppo lunghe, collegamenti rotti. Solo segnala: le correzioni si fanno in sessione.</li>
+              <li>Le flashcard di studio tornano a intervalli crescenti, in base a come rispondo.</li>
+              <li>Le scrivanie restano accese sul Mac e le uso dal telefono o dal PC del lavoro; se cadono, un guardiano le ricrea o le ricollega da solo.</li>
+            </ul>
+          </div>
+          <div data-l="en">
+            <ul>
+              <li>A timed calendar entry triggers a phone notification the day before and about an hour before, without going through the AI.</li>
+              <li>Every night a check looks for past deadlines, stale statuses, rules grown too long, broken links. It only reports: fixes happen in session.</li>
+              <li>Study flashcards come back at growing intervals, based on how I answer.</li>
+              <li>The desks stay on the Mac and I use them from my phone or my work PC; if they drop, a watchdog recreates or reconnects them.</li>
+            </ul>
+          </div>
+
+          <h3 data-l="it">Come si è evoluto</h3><h3 data-l="en">How it evolved</h3>
+          <div class="tappe">
+            <div class="tappa">
+              <div class="quando" data-l="it">Luglio 2026</div><div class="quando" data-l="en">July 2026</div>
+              <h4 data-l="it">Un quaderno con delle regole</h4><h4 data-l="en">A notebook with rules</h4>
+              <p data-l="it">Nasce come una cartella di note su Git, con una prima "costituzione": chi è l'assistente, chi sono io, come si lavora.</p>
+              <p data-l="en">It starts as a folder of notes on Git, with a first "constitution": who the assistant is, who I am, how we work.</p>
+            </div>
+            <div class="tappa">
+              <div class="quando" data-l="it">Agosto 2026</div><div class="quando" data-l="en">August 2026</div>
+              <h4 data-l="it">Esce dal computer</h4><h4 data-l="en">It leaves the desk</h4>
+              <p data-l="it">Lo uso dal telefono, con il Mac sempre acceso, e arrivano le prime notifiche automatiche degli appuntamenti.</p>
+              <p data-l="en">I start using it from my phone, with the Mac always on, and the first automatic appointment notifications arrive.</p>
+            </div>
+            <div class="tappa">
+              <div class="quando" data-l="it">Settembre 2026</div><div class="quando" data-l="en">September 2026</div>
+              <h4 data-l="it">Un secondo Jarvis, e i controlli</h4><h4 data-l="en">A second Jarvis, and the checks</h4>
+              <p data-l="it">Ne costruisco uno per un collega, con un utente separato e uno spazio di lavoro condiviso. Arrivano le flashcard con ripetizione spaziata, il controllo notturno e la prima review settimanale.</p>
+              <p data-l="en">I build one for a colleague, with a separate user and a shared workspace. Then come spaced-repetition flashcards, the nightly check and the first weekly review.</p>
+            </div>
+            <div class="tappa">
+              <div class="quando" data-l="it">Ottobre 2026</div><div class="quando" data-l="en">October 2026</div>
+              <h4 data-l="it">Da assistente a organizzazione</h4><h4 data-l="en">From assistant to organisation</h4>
+              <p data-l="it">Le cose crescono e una sola sessione non basta più. Prima la divisione in aree con uno Stato per ogni progetto, poi il registro degli errori e la regola "mai inventare". A fine mese la forma di oggi: la sede, quattro uffici, il ponte e il muro.</p>
+              <p data-l="en">Things grow and one session is no longer enough. First the split into areas with a status file per project, then the error register and the "never invent" rule. By the end of the month, today's shape: head office, four offices, the bridge and the wall.</p>
+            </div>
+            <div class="tappa oggi">
+              <div class="quando" data-l="it">Novembre 2026</div><div class="quando" data-l="en">November 2026</div>
+              <h4 data-l="it">Si ripara da solo</h4><h4 data-l="en">It repairs itself</h4>
+              <p data-l="it">Un guardiano controlla ogni minuto le sessioni e ricollega da solo quelle staccate. E il metodo diventa un kit, per chi vuole costruirsene uno.</p>
+              <p data-l="en">A watchdog checks the sessions every minute and reconnects the ones that drop. And the method becomes a kit, for anyone who wants to build their own.</p>
+            </div>
+          </div>
+
+          <div class="chiusura">
+            <div>
+              <h3 data-l="it">Costruisci il tuo Jarvis</h3><h3 data-l="en">Build your own Jarvis</h3>
+              <p data-l="it">Una guida per principianti e un kit di file da dare a Claude: ti accompagna lui, passo per passo, dalla prima chat al tuo assistente funzionante.</p>
+              <p data-l="en">A beginner's guide and a kit of files to give to Claude: it walks you through every step, from the first chat to a working assistant.</p>
+            </div>
+            <a class="bottone verde" href="#lavori/costruisci"><span data-l="it">Costruisci il tuo Jarvis</span><span data-l="en">Build your own Jarvis</span></a>
           </div>
         </div>
-        <dl class="scheda-tecnica">
-          <dt data-l="it">Strumenti</dt><dt data-l="en">Stack</dt>
-          <dd>Claude Code, Git, Python</dd>
-          <dt data-l="it">In uso</dt><dt data-l="en">In use</dt>
-          <dd data-l="it">Ogni giorno, dal 2026</dd><dd data-l="en">Daily, since 2026</dd>
-          <dt data-l="it">Utenti</dt><dt data-l="en">Users</dt>
-          <dd data-l="it">Io e un collega</dd><dd data-l="en">Me and a colleague</dd>
-        </dl>
+
+        <aside class="laterale">
+          <dl class="scheda-tecnica">
+            <dt data-l="it">Strumenti</dt><dt data-l="en">Stack</dt>
+            <dd>Claude Code, Git, Python</dd>
+            <dt data-l="it">In uso</dt><dt data-l="en">In use</dt>
+            <dd data-l="it">Ogni giorno; nato a luglio 2026</dd><dd data-l="en">Daily; started in July 2026</dd>
+            <dt data-l="it">Struttura</dt><dt data-l="en">Structure</dt>
+            <dd data-l="it">Una sede, quattro uffici</dd><dd data-l="en">One head office, four offices</dd>
+            <dt data-l="it">Utenti</dt><dt data-l="en">Users</dt>
+            <dd data-l="it">Io, e un collega con il suo</dd><dd data-l="en">Me, and a colleague with their own</dd>
+          </dl>
+          <a class="bottone verde" href="#lavori/costruisci"><span data-l="it">Costruisci il tuo Jarvis</span><span data-l="en">Build your own Jarvis</span></a>
+        </aside>
       </div>
     </section>
 
-    <!-- MANUALE -->
+    <!-- ============ COSTRUISCI IL TUO JARVIS ============ -->
+    <section class="sezione" id="sez-lavori/costruisci" aria-labelledby="t-costruisci">
+      <a class="indietro" href="#lavori/jarvis"><span data-l="it">← Jarvis</span><span data-l="en">← Jarvis</span></a>
+      <p class="occhiello" data-l="it">Kit Jarvis, edizione novembre 2026</p>
+      <p class="occhiello" data-l="en">Jarvis kit, November 2026 edition</p>
+      <h2 id="t-costruisci"><span data-l="it">Costruisci il tuo Jarvis</span><span data-l="en">Build your own Jarvis</span></h2>
+      <p class="lead" data-l="it">Un kit di file da dare a Claude, uno alla volta. È lui a guidarti e a dirti, alla fine di ogni passo, quale file dargli dopo.</p>
+      <p class="lead" data-l="en">A kit of files to hand to Claude, one at a time. It guides you, and at the end of each step it tells you which file comes next.</p>
+      <p class="nota-lingua" data-l="en">The kit and the guide below are in Italian for now.</p>
+      <div class="dettaglio">
+        <div class="corpo guida">
+<!-- GUIDA:INIZIO -->
+<p>Un assistente personale che si ricorda di te, delle tue cose e di come vuoi lavorare. Questa guida ti porta dall'inizio alla fine anche se non hai mai scritto una riga di codice: il lavoro tecnico lo fa Claude, tu segui i passi e prendi le decisioni.</p>
+<h2>Cosa stai per costruire</h2>
+<p>Claude, da solo, dimentica tutto alla fine di ogni conversazione. Il tuo Jarvis no, perché tiene la memoria in una cartella sul tuo computer: file di testo semplice che legge all'inizio di ogni sessione e aggiorna mentre lavorate. Dentro ci sono le sue regole, la tua agenda, le tue idee, lo stato di ogni progetto, un diario di ciò che succede e un registro dei suoi errori.</p>
+<p>Alla fine avrai:</p>
+<ul>
+<li>un assistente con il nome, la lingua e il tono che scegli tu;</li>
+<li>un'agenda e una "inbox" dove scaricare tutto ciò che hai in testa;</li>
+<li>una cartella per ogni progetto, che dice sempre dove sei arrivato e qual è il prossimo passo;</li>
+<li>un backup privato su GitHub con la storia di ogni modifica;</li>
+<li>se vuoi, promemoria sul telefono e un controllo automatico ogni notte.</li>
+</ul>
+<h2>Cosa ti serve</h2>
+<ul>
+<li>Un computer, Mac o Windows.</li>
+<li>Un account Claude con un piano a pagamento, da Pro in su: il tuo Jarvis vive nella scheda Code dell'app desktop di Claude, compresa nei piani a pagamento. Il prezzo aggiornato è su claude.com/pricing. Con il piano gratuito puoi fare la prima parte della guida, non la seconda.</li>
+<li>Un'ora o due per la costruzione, poi una settimana d'uso quotidiano, anche cinque minuti al giorno.</li>
+</ul>
+<h2>Come funziona questo kit</h2>
+<ul>
+<li>Nella cartella <code>passi/</code> ci sono undici file numerati, da <code>00</code> a <code>10</code>. Ognuno contiene le istruzioni per Claude su un passo della costruzione. <strong>Non devi leggerli tu</strong>: li trascini nella chat, uno alla volta, e Claude sa cosa fare. Alla fine di ogni passo è lui a dirti qual è il prossimo file.</li>
+<li>In <code>modello/</code> c'è lo scheletro della cartella del tuo assistente, con i file già pronti da personalizzare.</li>
+<li>C'è anche questa guida, da leggere o stampare, per sapere sempre dove sei.</li>
+</ul>
+<p>La costruzione ha due fasi. Nella <strong>prima</strong> parli con Claude sul sito claude.ai, che ti fa da istruttore. Nella <strong>seconda</strong> parli con il tuo nuovo assistente, che finisce di costruirsi insieme a te.</p>
+<h2>Fase 1 — Su claude.ai, con Claude come istruttore</h2>
+<h3>Passo 00. Inizia qui</h3>
+<p>Apri claude.ai, inizia una chat nuova e trascina dentro <code>00-inizia-qui.md</code>. Claude ti spiega il percorso e ti fa quattro domande: che computer usi, che piano hai, quanto sei pratico di file e cartelle, cosa vuoi che il tuo assistente faccia per te.</p>
+<p><em>Alla fine:</em> sai cosa ti serve e Claude conosce la tua situazione.</p>
+<h3>Passo 01. Come funziona</h3>
+<p>Trascina <code>01-come-funziona.md</code> nella stessa chat. Claude ti spiega le sei idee su cui si regge tutto: perché Claude non ricorda, perché la memoria sta in file di testo, perché le regole si scrivono una volta sola, perché ogni cosa ha una casa sola, perché l'assistente deve citare le fonti e scrivere i suoi errori, perché ogni sessione ha un inizio e una fine.</p>
+<p><em>Alla fine:</em> sai spiegare con parole tue perché servono i file.</p>
+<h3>Passo 02. Prepara il computer</h3>
+<p>Trascina <code>02-prepara-il-computer.md</code>. Qui si fanno cose, una alla volta:</p>
+<ol>
+<li>attivi il piano a pagamento, se non ce l'hai;</li>
+<li>installi l'<strong>app desktop di Claude</strong> da claude.com/download e accedi con il tuo account;</li>
+<li>guardi la scheda <strong>Code</strong> dell'app: è lì che vivrà il tuo assistente;</li>
+<li>crei una cartella con il suo nome, per esempio <code>Jarvis</code>, in Documenti. Meglio non in una cartella sincronizzata da OneDrive, iCloud o Dropbox;</li>
+<li>copi dentro tutto il contenuto della cartella <code>modello</code> del kit;</li>
+<li>se vuoi, installi <strong>Obsidian</strong> (gratuito) per leggere comodamente i file.</li>
+</ol>
+<p><em>Alla fine:</em> nella cartella ci sono <code>CLAUDE.md</code>, <code>Agenda.md</code>, <code>Inbox.md</code>, <code>Idee.md</code>, <code>Profilo.md</code>, <code>Registro errori.md</code> e le cartelle <code>Diario</code>, <code>File</code>, <code>Progetti</code>.</p>
+<h3>Passo 03. Il tuo assistente su misura</h3>
+<p>Trascina <code>03-il-tuo-assistente-su-misura.md</code> <strong>insieme</strong> ai file <code>CLAUDE.md</code> e <code>Profilo.md</code> della tua cartella. Claude ti fa un'intervista: che nome dare all'assistente, come vuoi essere chiamato, lingua, tono, chi sei, quali aree della tua vita deve tenere, cosa non deve mai fare, come lavori meglio. Poi ti restituisce i due file completi: li apri, sostituisci tutto il testo, salvi.</p>
+<p><em>Alla fine:</em> in <code>CLAUDE.md</code> non c'è più nessun segnaposto tra doppie graffe <code>{{ }}</code>.</p>
+<h3>Passo 04. Primo avvio</h3>
+<p>Trascina <code>04-primo-avvio.md</code>. Apri l'app desktop, scheda <strong>Code</strong>, scegli di lavorare in locale e apri la cartella del tuo assistente. Scrivi "Ciao". Poi fai cinque prove:</p>
+<ol>
+<li><strong>si presenta</strong> con il nome che hai scelto;</li>
+<li><strong>ti conosce</strong>: alla domanda "cosa sai di me?" risponde con il tuo profilo;</li>
+<li><strong>non inventa</strong>: a una domanda su qualcosa che non gli hai mai detto risponde "non lo so";</li>
+<li><strong>scrive</strong>: se gli chiedi di metterti una cosa in agenda, la trovi nel file;</li>
+<li><strong>ricorda</strong>: chiudi la sessione, ne apri una nuova, e sa ancora cosa c'è in agenda.</li>
+</ol>
+<p><em>Alla fine:</em> il tuo assistente è vivo. Da qui in poi i file li trascini nella sua chat, non più su claude.ai.</p>
+<h2>Fase 2 — Con il tuo assistente</h2>
+<h3>Passo 05. La prima settimana</h3>
+<p>Trascina <code>05-la-prima-settimana.md</code> nella chat del tuo assistente. Ti insegna quattro abitudini, usandole su cose vere: svuotare la testa nell'inbox e smistarla; creare il primo progetto con il suo stato; chiudere la sessione; riaprirla il giorno dopo senza doverti ricordare niente. Poi per cinque-sette giorni lo usi ogni giorno, anche pochi minuti. Ogni volta che qualcosa non ti piace, glielo dici: ti propone una regola nuova, e da quel momento vale per sempre.</p>
+<h3>Passo 06. Il backup</h3>
+<p>Trascina <code>06-il-backup.md</code>. L'assistente ti aiuta a creare un account GitHub (gratuito) e un repository <strong>privato</strong>, e ci collega la cartella con Git. Da quel momento ogni modifica ha una storia, si può sempre tornare indietro, e se il computer si rompe la memoria non si perde. Se preferisci i pulsanti ai comandi, puoi usare GitHub Desktop.</p>
+<p><em>Alla fine:</em> su GitHub vedi i tuoi file, con scritto <strong>Private</strong>.</p>
+<h3>Passo 07. La prima review</h3>
+<p>Dopo almeno una settimana, trascina <code>07-la-prima-review.md</code>. È il momento in cui l'assistente migliora davvero: svuotate l'inbox, guardate cosa è scaduto in agenda e i progetti fermi ("vivo, morto o da spacchettare?"), leggete il registro dei suoi errori e, per quelli che si ripetono, correggete la regola che li causa. Da qui in poi la review te la propone lui, ogni settimana.</p>
+<p><em>Alla fine:</em> la costruzione di base è finita.</p>
+<h2>Capitoli facoltativi</h2>
+<p>Quando vuoi, in qualsiasi ordine.</p>
+<h3>Passo 08. Promemoria sul telefono</h3>
+<p>Con l'app gratuita <strong>ntfy</strong> e un piccolo script che il computer lancia da solo, gli appuntamenti con l'ora ti arrivano come notifica il giorno prima e un'ora prima. Non usa l'IA e non consuma il tuo piano. Serve il computer acceso.</p>
+<h3>Passo 09. Il controllo notturno</h3>
+<p>Ogni notte uno script cerca le cose dimenticate: appuntamenti passati ancora aperti, progetti con lo stato vecchio, regole troppo lunghe, collegamenti rotti. Non corregge niente: la mattina l'assistente legge cosa ha trovato e te lo propone.</p>
+<h3>Passo 10. Quando i progetti crescono</h3>
+<p>Quando le cose diventano tante, la cartella si divide in una <strong>sede</strong>, che tiene te, e degli <strong>uffici</strong>, uno per ogni progetto grande, ognuno con la sua sessione e le sue regole. Si parlano attraverso un <strong>ponte</strong>: due file in cui l'ufficio scrive il suo resoconto e la sede lascia le richieste. Se vuoi, un <strong>muro</strong> impedisce a ogni ufficio di toccare i file degli altri.</p>
+<h2>Se qualcosa va storto</h2>
+<ul>
+<li>Se l'assistente risponde come un Claude qualsiasi, il file <code>CLAUDE.md</code> non è nella cartella aperta, oppure si chiama in un altro modo (attento a <code>CLAUDE.md.txt</code> su Windows). Controlla e riapri la sessione.</li>
+<li>Se non trova i file, nella scheda Code hai aperto la cartella sbagliata. Chiudi la sessione e riaprila sulla cartella giusta.</li>
+<li>Se inventa una cosa, diglielo. Deve scriverla nel registro degli errori, con la causa. Se succede di nuovo, nella review correggete la regola.</li>
+<li>Se una schermata dell'app è diversa da come la descrive la guida, è normale: le app cambiano. Manda uno screenshot a Claude e chiedi dove si trova la funzione.</li>
+<li>Se ti blocchi su un passo, chiedi a Claude di spiegartelo in modo più semplice, o di spezzarlo in passi più piccoli. È parte del suo lavoro.</li>
+</ul>
+<h2>Parole utili</h2>
+<ul>
+<li><strong>File <code>.md</code> (Markdown).</strong> Un file di testo semplice, con qualche simbolo per titoli ed elenchi. Si apre con qualsiasi programma di testo.</li>
+<li><strong><code>CLAUDE.md</code>.</strong> Il file con le regole del tuo assistente. Claude lo legge da solo a ogni avvio.</li>
+<li><strong>Sessione.</strong> Una conversazione con l'assistente, dall'apertura a "chiudi sessione".</li>
+<li><strong>Inbox.</strong> Il posto dove butti tutto senza pensarci, da smistare dopo.</li>
+<li><strong>Stato.</strong> Il file di un progetto che dice dove sei e qual è il prossimo passo. Si riscrive, non si allunga.</li>
+<li><strong>Diario.</strong> La cronaca: una riga per ogni cosa successa.</li>
+<li><strong>Git e GitHub.</strong> Git tiene la storia di ogni modifica; GitHub ne tiene una copia online, privata.</li>
+<li><strong>Hook.</strong> Un piccolo programma che Claude Code esegue prima di ogni azione, per controllarla.</li>
+</ul>
+<hr />
+<p>Kit preparato da Mattia Porta, a partire dal suo assistente. Edizione novembre 2026.</p>
+<!-- GUIDA:FINE -->
+          <div class="chiusura">
+            <div>
+              <h3 data-l="it">Scarica il kit</h3><h3 data-l="en">Download the kit</h3>
+              <p data-l="it">La cartella con i passi per Claude, il modello del tuo assistente e questa guida, anche in PDF da stampare.</p>
+              <p data-l="en">The folder with the steps for Claude, your assistant's template and this guide, also as a printable PDF.</p>
+            </div>
+            <div class="azioni">
+              <a class="bottone verde" href="kit-jarvis.zip" download><span data-l="it">Scarica il kit (.zip)</span><span data-l="en">Download the kit (.zip)</span></a>
+              <a class="bottone" href="costruisci-il-tuo-jarvis.pdf"><span data-l="it">Guida in PDF</span><span data-l="en">Guide as PDF</span></a>
+            </div>
+          </div>
+        </div>
+        <aside class="laterale">
+          <dl class="scheda-tecnica">
+            <dt data-l="it">Cosa contiene</dt><dt data-l="en">What's inside</dt>
+            <dd data-l="it">11 passi per Claude, il modello della cartella, la guida</dd><dd data-l="en">11 steps for Claude, the folder template, the guide</dd>
+            <dt data-l="it">Ti serve</dt><dt data-l="en">You need</dt>
+            <dd data-l="it">Mac o Windows, Claude Pro o superiore</dd><dd data-l="en">Mac or Windows, Claude Pro or higher</dd>
+            <dt data-l="it">Tempo</dt><dt data-l="en">Time</dt>
+            <dd data-l="it">Un'ora o due, poi una settimana d'uso</dd><dd data-l="en">An hour or two, then a week of use</dd>
+          </dl>
+          <a class="bottone verde" href="kit-jarvis.zip" download><span data-l="it">Scarica il kit (.zip)</span><span data-l="en">Download the kit (.zip)</span></a>
+          <a class="bottone" href="costruisci-il-tuo-jarvis.pdf"><span data-l="it">Guida in PDF</span><span data-l="en">Guide as PDF</span></a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ MANUALE ============ -->
     <section class="sezione" id="sez-lavori/manuale" aria-labelledby="t-manuale">
       <a class="indietro" href="#lavori"><span data-l="it">← Tutti i lavori</span><span data-l="en">← All work</span></a>
       <p class="occhiello" data-l="it">Manuale, 2026</p>
       <p class="occhiello" data-l="en">Handbook, 2026</p>
       <h2 id="t-manuale"><span data-l="it">Il leasing in IFRS 16 e OIC</span><span data-l="en">Leases under IFRS 16 and OIC</span></h2>
-      <p class="lead" data-l="it">Tutto il ciclo del leasing lato locatario, dalla firma del contratto all'ultimo ammortamento, fisco compreso.</p>
-      <p class="lead" data-l="en">The lessee's full lease cycle, from signing the contract to the last depreciation charge, tax included.</p>
+      <p class="lead" data-l="it">Tutto il ciclo del leasing lato locatario, dalla firma del contratto all'ultimo ammortamento, secondo IFRS 16 e secondo il codice civile e i principi OIC, fisco compreso.</p>
+      <p class="lead" data-l="en">The lessee's full lease cycle, from signing the contract to the last depreciation charge, under IFRS 16 and under the Italian civil code and OIC standards, tax included.</p>
       <div class="dettaglio">
         <div class="corpo">
+          <h3 data-l="it">Perché l'ho scritto</h3><h3 data-l="en">Why I wrote it</h3>
           <div data-l="it">
-            <p>Nasce dal ciclo IFRS 16 che gestisco ogni giorno in azienda e che ho imparato da autodidatta. Copre sia il principio internazionale sia i principi contabili italiani.</p>
-            <p>Comprende il sale and leaseback e i casi particolari, con esempi numerici calcolati e scritture contabili complete, verificate in partita doppia. L'ho scritto con l'aiuto dell'AI e l'ho rivisto due volte sulle fonti.</p>
-            <p><a class="bottone pieno" href="manuale-leasing.pdf">Scarica il PDF</a></p>
+            <p>Il ciclo IFRS 16 l'ho preso in mano in azienda nel 2025, subentrando a un collega, e l'ho imparato da autodidatta. Le risposte erano sparse tra il testo del principio, il codice civile, le norme fiscali e le guide delle società di revisione. Questo manuale le mette in un solo posto, nell'ordine in cui servono: quello della vita del contratto.</p>
           </div>
           <div data-l="en">
-            <p>It comes from the IFRS 16 cycle I run every day at work, a subject I taught myself. It covers both the international standard and Italian GAAP (OIC).</p>
-            <p>It also covers sale and leaseback and special cases, with worked numerical examples and complete double-entry journal entries. I wrote it with the help of AI and checked it twice against the sources. The handbook is in Italian.</p>
-            <p><a class="bottone pieno" href="manuale-leasing.pdf">Download the PDF</a></p>
+            <p>I took over the IFRS 16 cycle at work in 2025, stepping in for a colleague, and taught myself the subject. The answers were scattered across the standard, the civil code, tax law and the audit firms' guides. This handbook puts them in one place, in the order you need them: the life of the contract.</p>
+          </div>
+
+          <h3 data-l="it">Com'è fatto</h3><h3 data-l="en">What's inside</h3>
+          <div class="parti">
+            <div class="parte"><span class="num" data-l="it">Parte I</span><span class="num" data-l="en">Part I</span><div>
+              <h4 data-l="it">Il quadro</h4><h4 data-l="en">The framework</h4>
+              <p data-l="it">Due modi di rappresentare lo stesso contratto: il modello unico dell'IFRS 16 e il metodo patrimoniale del codice civile. Chi applica che cosa, e il vocabolario ufficiale.</p>
+              <p data-l="en">Two ways to show the same contract: the single IFRS 16 model and the Italian civil-code method. Who applies which, and the official vocabulary.</p></div></div>
+            <div class="parte"><span class="num" data-l="it">Parte II</span><span class="num" data-l="en">Part II</span><div>
+              <h4 data-l="it">IFRS 16 nel bilancio del locatario</h4><h4 data-l="en">IFRS 16 for the lessee</h4>
+              <p data-l="it">Cos'è un leasing e cosa resta fuori, la durata, la rilevazione iniziale e il tasso, debito e ammortamento. Un esempio completo, un macchinario dalla stipula all'ultimo ammortamento. Poi rideterminazioni (ISTAT, Euribor, durata), modifiche, risoluzione anticipata, rendiconto finanziario, imposte differite e nota.</p>
+              <p data-l="en">What a lease is and what falls outside, lease term, initial recognition and the discount rate, liability and depreciation. A full worked example: a machine from signing to the last depreciation charge. Then remeasurements (CPI, Euribor, term), modifications, early termination, cash flow statement, deferred tax and disclosures.</p></div></div>
+            <div class="parte"><span class="num" data-l="it">Parte III</span><span class="num" data-l="en">Part III</span><div>
+              <h4 data-l="it">OIC e fiscalità</h4><h4 data-l="en">OIC and tax</h4>
+              <p data-l="it">Il metodo patrimoniale sullo stesso macchinario, il prospetto della nota integrativa (art. 2427, n. 22), IFRS 16 e OIC a confronto sullo stesso contratto. Deduzione dei canoni (art. 102, comma 7, TUIR), quota interessi, fiscalità per chi applica gli IFRS.</p>
+              <p data-l="en">The Italian method on the same machine, the notes disclosure (art. 2427, no. 22), IFRS 16 and OIC compared on one contract. Deductibility of lease payments (art. 102(7) TUIR), the interest component, tax for IFRS reporters.</p></div></div>
+            <div class="parte"><span class="num" data-l="it">Parte IV</span><span class="num" data-l="en">Part IV</span><div>
+              <h4>Sale and leaseback</h4>
+              <p data-l="it">La domanda iniziale: è davvero una vendita? Con riscatto è un finanziamento, senza riscatto una vendita; e il leaseback nel bilancio OIC.</p>
+              <p data-l="en">The first question: is it really a sale? With a purchase option it is a financing, without one a sale; plus leaseback under OIC.</p></div></div>
+            <div class="parte"><span class="num" data-l="it">Parte V</span><span class="num" data-l="en">Part V</span><div>
+              <h4 data-l="it">Altri casi</h4><h4 data-l="en">Other cases</h4>
+              <p data-l="it">Affitti, noleggi e pagamenti variabili, il lato del locatore e il sub-leasing, il doppio binario OIC e reporting IFRS, i casi meno frequenti e i controlli di chiusura.</p>
+              <p data-l="en">Rents, hires and variable payments, the lessor side and subleases, running OIC accounts and IFRS reporting together, rarer cases and closing checks.</p></div></div>
+          </div>
+
+          <h3 data-l="it">Come è stato scritto</h3><h3 data-l="en">How it was written</h3>
+          <div data-l="it">
+            <p>Gli esempi numerici sono calcolati e ogni scrittura è verificata in partita doppia. I riferimenti a margine rimandano al testo ufficiale delle fonti; le guide delle società di revisione sono citate solo dove il principio tace. L'ho scritto con l'aiuto dell'AI e l'ho rivisto due volte sulle fonti. Testi normativi aggiornati al 9 ottobre 2026.</p>
+          </div>
+          <div data-l="en">
+            <p>The numerical examples are computed and every entry is checked by double entry. Margin references point to the official text of the sources; audit-firm guides are cited only where the standard is silent. I wrote it with the help of AI and checked it twice against the sources. Sources up to date as of 9 October 2026. The handbook is in Italian.</p>
+          </div>
+
+          <div class="chiusura">
+            <div>
+              <h3 data-l="it">Scarica il manuale</h3><h3 data-l="en">Download the handbook</h3>
+              <p data-l="it">41 pagine in PDF, gratis.</p>
+              <p data-l="en">41 pages, PDF, free (in Italian).</p>
+            </div>
+            <a class="bottone verde" href="manuale-leasing.pdf"><span data-l="it">Scarica il PDF</span><span data-l="en">Download the PDF</span></a>
           </div>
         </div>
-        <dl class="scheda-tecnica">
-          <dt data-l="it">Principi</dt><dt data-l="en">Standards</dt>
-          <dd>IFRS 16, OIC</dd>
-          <dt data-l="it">Lato</dt><dt data-l="en">Side</dt>
-          <dd data-l="it">Locatario</dd><dd data-l="en">Lessee</dd>
-          <dt data-l="it">Lingua</dt><dt data-l="en">Language</dt>
-          <dd data-l="it">Italiano</dd><dd data-l="en">Italian</dd>
-          <dt data-l="it">Pagine</dt><dt data-l="en">Pages</dt>
-          <dd>41</dd>
-          <dt data-l="it">Testi aggiornati al</dt><dt data-l="en">Sources as of</dt>
-          <dd data-l="it">9 ottobre 2026</dd><dd data-l="en">9 October 2026</dd>
-        </dl>
+        <aside class="laterale">
+          <dl class="scheda-tecnica">
+            <dt data-l="it">Principi</dt><dt data-l="en">Standards</dt>
+            <dd>IFRS 16, OIC</dd>
+            <dt data-l="it">Lato</dt><dt data-l="en">Side</dt>
+            <dd data-l="it">Locatario</dd><dd data-l="en">Lessee</dd>
+            <dt data-l="it">Pagine</dt><dt data-l="en">Pages</dt>
+            <dd>41</dd>
+            <dt data-l="it">Lingua</dt><dt data-l="en">Language</dt>
+            <dd data-l="it">Italiano</dd><dd data-l="en">Italian</dd>
+            <dt data-l="it">Testi aggiornati al</dt><dt data-l="en">Sources as of</dt>
+            <dd data-l="it">9 ottobre 2026</dd><dd data-l="en">9 October 2026</dd>
+          </dl>
+          <a class="bottone verde" href="manuale-leasing.pdf"><span data-l="it">Scarica il PDF</span><span data-l="en">Download the PDF</span></a>
+        </aside>
       </div>
     </section>
 
-    <!-- PERCORSO -->
+    <!-- ============ PERCORSO ============ -->
     <section class="sezione" id="sez-percorso" aria-labelledby="t-percorso">
       <p class="occhiello" data-l="it">Percorso</p>
       <p class="occhiello" data-l="en">Background</p>
       <h2 id="t-percorso"><span data-l="it">Da dove arrivo</span><span data-l="en">Where I come from</span></h2>
-      <div class="tappe">
-        <div class="tappa">
+      <div class="tappe" style="margin-top:36px">
+        <div class="tappa oggi">
           <div class="quando" data-l="it">Ottobre 2024 – oggi</div><div class="quando" data-l="en">October 2024 – present</div>
           <h3>Webuild, Pedelombarda Nuova</h3>
           <div class="dove" data-l="it">Amministrazione, Finanza e Controllo, Desio</div><div class="dove" data-l="en">Administration, Finance &amp; Control, Desio</div>
@@ -372,7 +758,7 @@ html[lang="en"] [data-l="en"] { display: revert !important; }
       </div>
     </section>
 
-    <!-- CONTATTI -->
+    <!-- ============ CONTATTI ============ -->
     <section class="sezione" id="sez-contatti" aria-labelledby="t-contatti">
       <p class="occhiello" data-l="it">Contatti</p>
       <p class="occhiello" data-l="en">Contact</p>
@@ -422,7 +808,6 @@ html[lang="en"] [data-l="en"] { display: revert !important; }
   function mostra() {
     var id = decodeURIComponent(location.hash.slice(1)) || "inizio";
     var sez = document.getElementById("sez-" + id) || document.getElementById("sez-inizio");
-    if (!sez) return;
     document.querySelectorAll(".sezione").forEach(function (s) { s.classList.remove("attiva"); });
     sez.classList.add("attiva");
     var radice = sez.id.slice(4).split("/")[0];
