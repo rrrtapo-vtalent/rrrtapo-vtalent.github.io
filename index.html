@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mattia Porta</title>
+<meta name="description" content="Mattia Porta: amministrazione, finanza e controllo, e gli strumenti che costruisco per lavorarci.">
+<style>
+@font-face { font-family: "EB Garamond"; src: url("font/EBGaramond-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("font/EBGaramond-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("font/EBGaramond-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+
+:root {
+  --desk: #E4E8E3;      /* il tavolo */
+  --sheet: #FCFCFA;     /* il foglio */
+  --ink: #15191A;       /* inchiostro */
+  --soft: #5B6461;      /* testo secondario */
+  --ledger: #1F4D3A;    /* verde registro */
+  --rule: #D5E0D8;      /* righe della carta a colonne */
+  --tab: #D3DAD4;       /* linguette chiuse */
+  --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; background: var(--desk); color: var(--ink);
+  font-family: var(--serif); font-size: 20px; line-height: 1.55;
+}
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--ledger); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 64px; }
+
+/* testata sopra il raccoglitore */
+.top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.marchio { font-family: var(--sans); font-size: 13px; letter-spacing: .08em; color: var(--soft); text-decoration: none; }
+.lingua { font-family: var(--sans); font-size: 13px; display: flex; gap: 2px; }
+.lingua button {
+  font: inherit; border: 0; background: transparent; color: var(--soft); padding: 6px 10px; border-radius: 20px; cursor: pointer;
+}
+.lingua button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+
+/* linguette */
+nav.linguette { display: flex; gap: 4px; padding-left: 18px; overflow-x: auto; scrollbar-width: none; }
+nav.linguette::-webkit-scrollbar { display: none; }
+nav.linguette a {
+  font-family: var(--sans); font-size: 14px; text-decoration: none; color: var(--soft); white-space: nowrap;
+  background: var(--tab); padding: 11px 20px 9px; border-radius: 10px 10px 0 0;
+  transform: translateY(4px); transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+nav.linguette a:hover { transform: translateY(1px); color: var(--ink); }
+nav.linguette a[aria-current="page"] { background: var(--sheet); color: var(--ink); transform: none; font-weight: 600; }
+
+/* il foglio */
+.foglio {
+  background: var(--sheet); border-radius: 4px 14px 14px 14px; min-height: 500px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 40px -22px rgba(21,25,26,.35);
+  position: relative; overflow: hidden;
+}
+.sezione { display: none; padding: 56px 64px 64px; animation: entra .35s ease both; }
+.sezione.attiva { display: block; }
+@keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.occhiello { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); margin: 0 0 14px; }
+h1, h2, h3 { font-weight: 500; margin: 0; }
+h2 { font-size: 40px; line-height: 1.1; letter-spacing: -.01em; }
+.lead { font-size: 22px; color: var(--ink); max-width: 34em; margin: 18px 0 0; }
+p { margin: 0 0 14px; }
+
+/* ---------- inizio ---------- */
+.inizio { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.inizio h1 { font-size: 64px; line-height: 1.02; letter-spacing: -.02em; }
+.tesi { font-size: 25px; line-height: 1.35; margin: 22px 0 30px; max-width: 18em; }
+.tesi em { color: var(--ledger); }
+.azioni { display: flex; gap: 12px; flex-wrap: wrap; }
+.bottone {
+  font-family: var(--sans); font-size: 15px; text-decoration: none; padding: 12px 20px; border-radius: 999px;
+  border: 1px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; transition: background .15s, color .15s;
+}
+.bottone.pieno { background: var(--ink); color: var(--sheet); }
+.bottone:hover { background: var(--ledger); border-color: var(--ledger); color: var(--sheet); }
+
+/* il registro: carta a colonne */
+.registro {
+  border: 1px solid var(--rule); border-radius: 6px; background:
+    linear-gradient(to right, transparent calc(62% - 1px), var(--rule) calc(62% - 1px), var(--rule) 62%, transparent 62%),
+    var(--sheet);
+  font-size: 18px;
+}
+.registro .intest, .registro .riga {
+  display: grid; grid-template-columns: 62% 38%; border-bottom: 1px solid var(--rule);
+}
+.registro .intest span { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); padding: 12px 16px 10px; }
+.registro .riga span { padding: 11px 16px; }
+.registro .riga .con { font-family: var(--sans); font-size: 14px; color: var(--soft); align-self: center; }
+.registro .riga:last-child { border-bottom: 0; }
+.registro .riga { opacity: 0; transform: translateX(-8px); }
+.attiva .registro .riga { animation: registra .45s ease forwards; }
+.attiva .registro .riga:nth-child(2) { animation-delay: .25s; }
+.attiva .registro .riga:nth-child(3) { animation-delay: .5s; }
+.attiva .registro .riga:nth-child(4) { animation-delay: .75s; }
+.attiva .registro .riga:nth-child(5) { animation-delay: 1s; }
+@keyframes registra { to { opacity: 1; transform: none; } }
+.registro .riga.ia .voce { color: var(--ledger); font-style: italic; }
+.didascalia { font-family: var(--sans); font-size: 12px; color: var(--soft); margin-top: 10px; }
+
+/* ---------- lavori ---------- */
+.schede { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 36px; }
+.scheda {
+  display: block; text-decoration: none; color: var(--ink); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 26px 26px 22px; background: var(--sheet); position: relative; transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+}
+.scheda:hover { transform: translateY(-3px); border-color: var(--ledger); box-shadow: 0 14px 30px -20px rgba(31,77,58,.6); }
+.scheda .tipo { font-family: var(--sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ledger); }
+.scheda h3 { font-size: 30px; margin: 10px 0 8px; line-height: 1.15; }
+.scheda p { color: var(--soft); font-size: 18px; }
+.scheda .apri { font-family: var(--sans); font-size: 14px; color: var(--ink); display: inline-flex; gap: 6px; align-items: center; }
+.scheda .apri::after { content: "→"; transition: transform .18s; }
+.scheda:hover .apri::after { transform: translateX(4px); }
+
+/* dettaglio di un lavoro */
+.indietro { font-family: var(--sans); font-size: 14px; text-decoration: none; color: var(--soft); display: inline-block; margin-bottom: 26px; }
+.indietro:hover { color: var(--ink); }
+.dettaglio { display: grid; grid-template-columns: 1fr 260px; gap: 56px; margin-top: 30px; }
+.dettaglio .corpo p { max-width: 36em; }
+.scheda-tecnica { border-left: 2px solid var(--ledger); padding-left: 20px; font-family: var(--sans); font-size: 14px; color: var(--soft); align-self: start; }
+.scheda-tecnica dt { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); margin-top: 16px; }
+.scheda-tecnica dt:first-child { margin-top: 0; }
+.scheda-tecnica dd { margin: 4px 0 0; color: var(--ink); }
+
+/* il ciclo di Jarvis */
+.ciclo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 26px 0 30px; font-family: var(--sans); font-size: 14px; }
+.ciclo span.passo { border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px; background: #F3F6F3; }
+.ciclo span.freccia { color: var(--ledger); }
+
+/* ---------- percorso ---------- */
+.tappe { margin-top: 36px; border-left: 2px solid var(--rule); padding-left: 28px; }
+.tappa { position: relative; padding-bottom: 30px; }
+.tappa::before { content: ""; position: absolute; left: -36px; top: 10px; width: 12px; height: 12px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--ledger); }
+.tappa:first-child::before { background: var(--ledger); }
+.tappa .quando { font-family: var(--sans); font-size: 13px; color: var(--soft); }
+.tappa h3 { font-size: 26px; margin: 2px 0 2px; }
+.tappa .dove { font-style: italic; color: var(--soft); margin-bottom: 8px; }
+.tappa p { max-width: 36em; }
+.attrezzi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 10px; padding-top: 28px; border-top: 1px solid var(--rule); }
+.attrezzi h3 { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); font-weight: 400; margin-bottom: 10px; }
+.etichette { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--sans); font-size: 14px; }
+.etichette span { border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; }
+
+/* ---------- contatti ---------- */
+.contatti-griglia { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 36px; max-width: 760px; }
+.contatto { border: 1px solid var(--rule); border-radius: 10px; padding: 24px; }
+.contatto .tipo { font-family: var(--sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ledger); }
+.contatto .valore { font-size: 22px; margin: 8px 0 16px; word-break: break-word; }
+.contatto .azioni .bottone { font-size: 14px; padding: 9px 16px; }
+.nota { margin-top: 26px; color: var(--soft); font-style: italic; }
+
+footer { font-family: var(--sans); font-size: 12px; color: var(--soft); text-align: center; margin-top: 22px; }
+
+[data-l="en"] { display: none !important; }
+html[lang="en"] [data-l="it"] { display: none !important; }
+html[lang="en"] [data-l="en"] { display: revert !important; }
+
+@media (max-width: 820px) {
+  .wrap { padding: 20px 12px 40px; }
+  .sezione { padding: 34px 22px 40px; }
+  .inizio, .dettaglio, .contatti-griglia, .attrezzi { grid-template-columns: 1fr; gap: 32px; }
+  .inizio h1 { font-size: 46px; }
+  .tesi { font-size: 22px; }
+  h2 { font-size: 32px; }
+  .schede { grid-template-columns: 1fr; }
+  nav.linguette { padding-left: 6px; }
+  nav.linguette a { padding: 10px 14px 8px; font-size: 13px; }
+  .foglio { border-radius: 4px 4px 12px 12px; }
+  body { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .registro .riga { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="marchio" href="#inizio">MATTIA PORTA</a>
+    <div class="lingua" role="group" aria-label="Lingua / Language">
+      <button type="button" data-set="it" aria-pressed="true">IT</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <nav class="linguette" aria-label="Sezioni">
+    <a href="#inizio" data-sez="inizio"><span data-l="it">Inizio</span><span data-l="en">Home</span></a>
+    <a href="#lavori" data-sez="lavori"><span data-l="it">Lavori</span><span data-l="en">Work</span></a>
+    <a href="#percorso" data-sez="percorso"><span data-l="it">Percorso</span><span data-l="en">Background</span></a>
+    <a href="#contatti" data-sez="contatti"><span data-l="it">Contatti</span><span data-l="en">Contact</span></a>
+  </nav>
+
+  <main class="foglio">
+
+    <!-- INIZIO -->
+    <section class="sezione" id="sez-inizio" aria-labelledby="t-inizio">
+      <div class="inizio">
+        <div>
+          <p class="occhiello" data-l="it">Amministrazione, finanza e controllo</p>
+          <p class="occhiello" data-l="en">Administration, finance &amp; control</p>
+          <h1 id="t-inizio">Mattia Porta</h1>
+          <p class="tesi" data-l="it">Tengo i conti del cantiere della Pedemontana. E costruisco <em>gli strumenti</em> per tenerli meglio.</p>
+          <p class="tesi" data-l="en">I keep the books for the Pedemontana motorway build. And I build <em>the tools</em> to keep them better.</p>
+          <div class="azioni">
+            <a class="bottone pieno" href="#lavori"><span data-l="it">Guarda i lavori</span><span data-l="en">See my work</span></a>
+            <a class="bottone" href="#contatti"><span data-l="it">Scrivimi</span><span data-l="en">Get in touch</span></a>
+          </div>
+        </div>
+        <div>
+          <div class="registro" role="table" aria-label="Cosa faccio">
+            <div class="intest" role="row"><span role="columnheader" data-l="it">Cosa faccio</span><span role="columnheader" data-l="en">What I do</span><span role="columnheader" data-l="it">Con cosa</span><span role="columnheader" data-l="en">With</span></div>
+            <div class="riga" role="row"><span class="voce" data-l="it">Ciclo del leasing in IFRS 16</span><span class="voce" data-l="en">IFRS 16 lease cycle</span><span class="con">SAP FI-AA</span></div>
+            <div class="riga" role="row"><span class="voce" data-l="it">Reporting di gruppo</span><span class="voce" data-l="en">Group reporting</span><span class="con">HFM</span></div>
+            <div class="riga" role="row"><span class="voce" data-l="it">Cash flow e PFN</span><span class="voce" data-l="en">Cash flow &amp; net debt</span><span class="con">IBM TM1</span></div>
+            <div class="riga ia" role="row"><span class="voce" data-l="it">Gli strumenti per fare tutto questo</span><span class="voce" data-l="en">The tools to do all of this</span><span class="con">Python, Claude Code</span></div>
+          </div>
+          <p class="didascalia" data-l="it">Webuild, consorzio Pedelombarda Nuova, da ottobre 2024.</p>
+          <p class="didascalia" data-l="en">Webuild, Pedelombarda Nuova consortium, since October 2024.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAVORI -->
+    <section class="sezione" id="sez-lavori" aria-labelledby="t-lavori">
+      <p class="occhiello" data-l="it">Lavori finiti</p>
+      <p class="occhiello" data-l="en">Finished work</p>
+      <h2 id="t-lavori"><span data-l="it">Cosa ho costruito</span><span data-l="en">What I've built</span></h2>
+      <div class="schede">
+        <a class="scheda" href="#lavori/jarvis">
+          <span class="tipo" data-l="it">Assistente AI</span><span class="tipo" data-l="en">AI assistant</span>
+          <h3>Jarvis</h3>
+          <p data-l="it">Un assistente con memoria che non dimentica tra una conversazione e l'altra. Lo uso ogni giorno.</p>
+          <p data-l="en">An assistant with a memory that carries over from one conversation to the next. I use it every day.</p>
+          <span class="apri"><span data-l="it">Come funziona</span><span data-l="en">How it works</span></span>
+        </a>
+        <a class="scheda" href="#lavori/manuale">
+          <span class="tipo" data-l="it">Manuale, PDF</span><span class="tipo" data-l="en">Handbook, PDF</span>
+          <h3><span data-l="it">Il leasing in IFRS 16 e OIC</span><span data-l="en">Leases under IFRS 16 and OIC</span></h3>
+          <p data-l="it">Tutto il ciclo del leasing lato locatario, dalla firma all'ultimo ammortamento.</p>
+          <p data-l="en">The lessee's full lease cycle, from signing to the last depreciation charge.</p>
+          <span class="apri"><span data-l="it">Leggi e scarica</span><span data-l="en">Read and download</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- JARVIS -->
+    <section class="sezione" id="sez-lavori/jarvis" aria-labelledby="t-jarvis">
+      <a class="indietro" href="#lavori"><span data-l="it">← Tutti i lavori</span><span data-l="en">← All work</span></a>
+      <p class="occhiello" data-l="it">Assistente AI, 2026</p>
+      <p class="occhiello" data-l="en">AI assistant, 2026</p>
+      <h2 id="t-jarvis">Jarvis</h2>
+      <p class="lead" data-l="it">Un modello di linguaggio dimentica tutto tra una conversazione e l'altra. Jarvis no.</p>
+      <p class="lead" data-l="en">A language model forgets everything between one conversation and the next. Jarvis doesn't.</p>
+      <div class="ciclo" aria-label="Il ciclo di una sessione">
+        <span class="passo" data-l="it">Legge regole e stato</span><span class="passo" data-l="en">Reads rules and status</span>
+        <span class="freccia">→</span>
+        <span class="passo" data-l="it">Lavora con me</span><span class="passo" data-l="en">Works with me</span>
+        <span class="freccia">→</span>
+        <span class="passo" data-l="it">Scrive cosa è cambiato</span><span class="passo" data-l="en">Writes down what changed</span>
+        <span class="freccia">→</span>
+        <span class="passo" data-l="it">Salva su Git</span><span class="passo" data-l="en">Commits to Git</span>
+      </div>
+      <div class="dettaglio">
+        <div class="corpo">
+          <div data-l="it">
+            <p>Jarvis è un agente Claude Code che lavora su una base di conoscenza in file di testo, versionata con Git. Agenda, decisioni e stato dei progetti vengono scritti man mano, così ogni sessione riparte da dove si era rimasti.</p>
+            <p>Le regole di comportamento sono scritte come specifiche e valgono in ogni sessione: ogni fatto deve avere una fonte, ogni errore finisce in un registro. Automazioni locali girano anche quando non ci sono: promemoria, controlli notturni, ripetizione spaziata per lo studio.</p>
+            <p>L'ho esteso a un collega, con un'istanza propria su uno spazio di lavoro condiviso.</p>
+          </div>
+          <div data-l="en">
+            <p>Jarvis is a Claude Code agent working on a plain-text knowledge base versioned with Git. Calendar, decisions and project status are written down as work goes on, so every session picks up where the last one stopped.</p>
+            <p>Its operating rules are written as specifications and apply in every session: every fact needs a source, every mistake goes into a log. Local automations run even when I'm away: reminders, nightly checks, spaced repetition for study.</p>
+            <p>I extended it to a colleague, with a separate instance on a shared workspace.</p>
+          </div>
+        </div>
+        <dl class="scheda-tecnica">
+          <dt data-l="it">Strumenti</dt><dt data-l="en">Stack</dt>
+          <dd>Claude Code, Git, Python</dd>
+          <dt data-l="it">In uso</dt><dt data-l="en">In use</dt>
+          <dd data-l="it">Ogni giorno, dal 2026</dd><dd data-l="en">Daily, since 2026</dd>
+          <dt data-l="it">Utenti</dt><dt data-l="en">Users</dt>
+          <dd data-l="it">Io e un collega</dd><dd data-l="en">Me and a colleague</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- MANUALE -->
+    <section class="sezione" id="sez-lavori/manuale" aria-labelledby="t-manuale">
+      <a class="indietro" href="#lavori"><span data-l="it">← Tutti i lavori</span><span data-l="en">← All work</span></a>
+      <p class="occhiello" data-l="it">Manuale, 2026</p>
+      <p class="occhiello" data-l="en">Handbook, 2026</p>
+      <h2 id="t-manuale"><span data-l="it">Il leasing in IFRS 16 e OIC</span><span data-l="en">Leases under IFRS 16 and OIC</span></h2>
+      <p class="lead" data-l="it">Tutto il ciclo del leasing lato locatario, dalla firma del contratto all'ultimo ammortamento, fisco compreso.</p>
+      <p class="lead" data-l="en">The lessee's full lease cycle, from signing the contract to the last depreciation charge, tax included.</p>
+      <div class="dettaglio">
+        <div class="corpo">
+          <div data-l="it">
+            <p>Nasce dal ciclo IFRS 16 che gestisco ogni giorno in azienda e che ho imparato da autodidatta. Copre sia il principio internazionale sia i principi contabili italiani.</p>
+            <p>Comprende il sale and leaseback e i casi particolari, con esempi numerici calcolati e scritture contabili complete, verificate in partita doppia. L'ho scritto con l'aiuto dell'AI e l'ho rivisto due volte sulle fonti.</p>
+            <p><a class="bottone pieno" href="manuale-leasing.pdf">Scarica il PDF</a></p>
+          </div>
+          <div data-l="en">
+            <p>It comes from the IFRS 16 cycle I run every day at work, a subject I taught myself. It covers both the international standard and Italian GAAP (OIC).</p>
+            <p>It also covers sale and leaseback and special cases, with worked numerical examples and complete double-entry journal entries. I wrote it with the help of AI and checked it twice against the sources. The handbook is in Italian.</p>
+            <p><a class="bottone pieno" href="manuale-leasing.pdf">Download the PDF</a></p>
+          </div>
+        </div>
+        <dl class="scheda-tecnica">
+          <dt data-l="it">Principi</dt><dt data-l="en">Standards</dt>
+          <dd>IFRS 16, OIC</dd>
+          <dt data-l="it">Lato</dt><dt data-l="en">Side</dt>
+          <dd data-l="it">Locatario</dd><dd data-l="en">Lessee</dd>
+          <dt data-l="it">Lingua</dt><dt data-l="en">Language</dt>
+          <dd data-l="it">Italiano</dd><dd data-l="en">Italian</dd>
+          <dt data-l="it">Pagine</dt><dt data-l="en">Pages</dt>
+          <dd>41</dd>
+          <dt data-l="it">Testi aggiornati al</dt><dt data-l="en">Sources as of</dt>
+          <dd data-l="it">9 ottobre 2026</dd><dd data-l="en">9 October 2026</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- PERCORSO -->
+    <section class="sezione" id="sez-percorso" aria-labelledby="t-percorso">
+      <p class="occhiello" data-l="it">Percorso</p>
+      <p class="occhiello" data-l="en">Background</p>
+      <h2 id="t-percorso"><span data-l="it">Da dove arrivo</span><span data-l="en">Where I come from</span></h2>
+      <div class="tappe">
+        <div class="tappa">
+          <div class="quando" data-l="it">Ottobre 2024 – oggi</div><div class="quando" data-l="en">October 2024 – present</div>
+          <h3>Webuild, Pedelombarda Nuova</h3>
+          <div class="dove" data-l="it">Amministrazione, Finanza e Controllo, Desio</div><div class="dove" data-l="en">Administration, Finance &amp; Control, Desio</div>
+          <p data-l="it">Il consorzio che costruisce l'autostrada Pedemontana Lombarda. Gestisco da solo il ciclo del leasing in IFRS 16, preso in carico nel 2025 da autodidatta. Curo il piano investimenti, il cash budgeting e lo stato patrimoniale per budget e forecast, il reporting di gruppo su HFM e il cash flow su TM1.</p>
+          <p data-l="en">The consortium building the Pedemontana Lombarda motorway. I run the IFRS 16 lease cycle on my own, a process I took over in 2025 and taught myself. I build the investment plan, the cash budget and the balance sheet for budget and forecast, the group reporting on HFM and the cash flow on TM1.</p>
+        </div>
+        <div class="tappa">
+          <div class="quando" data-l="it">Gennaio – maggio 2024</div><div class="quando" data-l="en">January – May 2024</div>
+          <h3>Purdue University</h3>
+          <div class="dove" data-l="it">Semestre di scambio, West Lafayette, USA</div><div class="dove" data-l="en">Exchange semester, West Lafayette, USA</div>
+          <p data-l="it">Membro della Purdue Accounting Association.</p>
+          <p data-l="en">Member of the Purdue Accounting Association.</p>
+        </div>
+        <div class="tappa">
+          <div class="quando">2021 – 2024</div>
+          <h3 data-l="it">Università Bocconi</h3><h3 data-l="en">Bocconi University</h3>
+          <div class="dove" data-l="it">Laurea triennale in Economics and Finance, Milano</div><div class="dove" data-l="en">BSc in Economics and Finance, Milan</div>
+          <p data-l="it">Membro di Bocconi Students for Business Analytics &amp; Valuation.</p>
+          <p data-l="en">Member of Bocconi Students for Business Analytics &amp; Valuation.</p>
+        </div>
+      </div>
+      <div class="attrezzi">
+        <div>
+          <h3 data-l="it">Strumenti</h3><h3 data-l="en">Tools</h3>
+          <div class="etichette"><span>SAP FI / FI-AA</span><span>HFM</span><span>IBM TM1</span><span>Excel</span><span>Python</span><span>Claude Code</span><span>MCP</span></div>
+        </div>
+        <div>
+          <h3 data-l="it">Lingue</h3><h3 data-l="en">Languages</h3>
+          <div class="etichette">
+            <span data-l="it">Italiano, madrelingua</span><span data-l="en">Italian, native</span>
+            <span data-l="it">Inglese, C1</span><span data-l="en">English, C1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section class="sezione" id="sez-contatti" aria-labelledby="t-contatti">
+      <p class="occhiello" data-l="it">Contatti</p>
+      <p class="occhiello" data-l="en">Contact</p>
+      <h2 id="t-contatti"><span data-l="it">Scrivimi</span><span data-l="en">Get in touch</span></h2>
+      <div class="contatti-griglia">
+        <div class="contatto">
+          <div class="tipo">Email</div>
+          <div class="valore">mattiaporta2002@gmail.com</div>
+          <div class="azioni">
+            <a class="bottone pieno" href="mailto:mattiaporta2002@gmail.com"><span data-l="it">Scrivi</span><span data-l="en">Write</span></a>
+            <button class="bottone" type="button" id="copia"><span data-l="it">Copia indirizzo</span><span data-l="en">Copy address</span></button>
+          </div>
+        </div>
+        <div class="contatto">
+          <div class="tipo">LinkedIn</div>
+          <div class="valore">Mattia Porta</div>
+          <div class="azioni">
+            <a class="bottone pieno" href="https://www.linkedin.com/in/mattia-porta-9a3057276/" target="_blank" rel="noopener"><span data-l="it">Apri il profilo</span><span data-l="en">Open profile</span></a>
+          </div>
+        </div>
+      </div>
+      <p class="nota" data-l="it">Il curriculum lo mando su richiesta.</p>
+      <p class="nota" data-l="en">CV available on request.</p>
+    </section>
+
+  </main>
+  <footer>Mattia Porta, Agrate Brianza (MB)</footer>
+</div>
+<script>
+(function () {
+  var html = document.documentElement;
+
+  function lingua(l) {
+    html.lang = l;
+    document.querySelectorAll(".lingua button").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.dataset.set === l ? "true" : "false");
+    });
+    try { localStorage.setItem("lingua", l); } catch (e) {}
+  }
+  var salvata = null;
+  try { salvata = localStorage.getItem("lingua"); } catch (e) {}
+  lingua(salvata || ((navigator.language || "it").slice(0, 2) === "it" ? "it" : "en"));
+  document.querySelectorAll(".lingua button").forEach(function (b) {
+    b.addEventListener("click", function () { lingua(b.dataset.set); });
+  });
+
+  function mostra() {
+    var id = decodeURIComponent(location.hash.slice(1)) || "inizio";
+    var sez = document.getElementById("sez-" + id) || document.getElementById("sez-inizio");
+    if (!sez) return;
+    document.querySelectorAll(".sezione").forEach(function (s) { s.classList.remove("attiva"); });
+    sez.classList.add("attiva");
+    var radice = sez.id.slice(4).split("/")[0];
+    document.querySelectorAll("nav.linguette a").forEach(function (a) {
+      if (a.dataset.sez === radice) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    if (location.hash) window.scrollTo({ top: 0 });
+  }
+  window.addEventListener("hashchange", mostra);
+  mostra();
+
+  var copia = document.getElementById("copia");
+  copia.addEventListener("click", function () {
+    var fatto = function () {
+      copia.querySelector('[data-l="it"]').textContent = "Copiato";
+      copia.querySelector('[data-l="en"]').textContent = "Copied";
+    };
+    try { navigator.clipboard.writeText("mattiaporta2002@gmail.com").then(fatto); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
