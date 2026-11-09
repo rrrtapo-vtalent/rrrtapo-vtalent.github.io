@@ -184,6 +184,13 @@ p { margin: 0 0 14px; }
 .parte .num { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ledger); padding-top: 6px; }
 .parte h4 { margin: 0 0 4px; font-size: 21px; }
 .parte p { margin: 0; color: var(--soft); font-size: 17.5px; }
+.confronto .parte { grid-template-columns: 112px 1fr; }
+.coppia { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.coppia .et { display: block; font-family: var(--sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); margin-bottom: 3px; }
+.coppia .ora .et { color: var(--ledger); }
+.coppia .ora p { color: var(--ink); }
+.prova { margin: 30px 0 4px; display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
+.prova p { margin: 0; color: var(--soft); font-family: var(--sans); font-size: 14px; max-width: 30em; }
 
 /* la guida dentro il sito */
 .guida h2 { font-size: 30px; margin: 46px 0 12px; }
@@ -229,6 +236,8 @@ html[lang="en"] [data-l="it"] { display: none !important; }
   .mappa .uffici, .mappa .ponte { grid-template-columns: 1fr 1fr; }
   .mappa .ponte span:nth-child(n+3) { display: none; }
   .parte { grid-template-columns: 1fr; gap: 2px; }
+  .coppia { grid-template-columns: 1fr; gap: 10px; }
+  .confronto .parte { grid-template-columns: 1fr; }
   nav.linguette { padding-left: 6px; }
   nav.linguette a { padding: 10px 14px 8px; font-size: 13px; }
   .foglio { border-radius: 4px 4px 12px 12px; }
@@ -305,6 +314,15 @@ html[lang="en"] [data-l="it"] { display: none !important; }
       <p class="occhiello" data-l="en">Finished work</p>
       <h2 id="t-lavori"><span data-l="it">Cosa ho costruito</span><span data-l="en">What I've built</span></h2>
       <div class="schede">
+        <a class="scheda" href="#lavori/afc">
+          <span class="tipo" data-l="it">Applicazione web, 2026</span><span class="tipo" data-l="en">Web application, 2026</span>
+          <h3>AFC Integrata</h3>
+          <p class="gancio" data-l="it">Il mese di un ufficio amministrazione e finanza in un solo sito: dalla previsione di cassa ai pagamenti, fino alla chiusura del mese.</p>
+          <p class="gancio" data-l="en">A finance office's month in one site: from the cash forecast to the payment run to the month-end close.</p>
+          <p class="cosa" data-l="it">Chi non è in regola con i contributi resta bloccato da solo, i movimenti della banca si abbinano da soli alla previsione, cespiti e leasing si controllano ogni mese. C'è una demo da provare.</p>
+          <p class="cosa" data-l="en">Subcontractors who aren't compliant are blocked automatically, bank transactions match themselves to the forecast, fixed assets and leases are checked every month. There's a demo you can try.</p>
+          <span class="apri"><span data-l="it">Guarda e prova</span><span data-l="en">See it and try it</span></span>
+        </a>
         <a class="scheda" href="#lavori/jarvis">
           <span class="tipo" data-l="it">Assistente AI, dal 2026</span><span class="tipo" data-l="en">AI assistant, since 2026</span>
           <h3>Jarvis</h3>
@@ -323,6 +341,155 @@ html[lang="en"] [data-l="it"] { display: none !important; }
           <p class="cosa" data-l="en">IFRS 16 and Italian GAAP side by side, CPI and Euribor remeasurements, modifications and early termination, sale and leaseback, tax. Born from the cycle I run every day at work.</p>
           <span class="apri"><span data-l="it">Leggi e scarica</span><span data-l="en">Read and download</span></span>
         </a>
+      </div>
+    </section>
+
+    <!-- ============ AFC INTEGRATA ============ -->
+    <section class="sezione" id="sez-lavori/afc" aria-labelledby="t-afc">
+      <a class="indietro" href="#lavori"><span data-l="it">← Tutti i lavori</span><span data-l="en">← All work</span></a>
+      <p class="occhiello" data-l="it">Applicazione web, 2026</p>
+      <p class="occhiello" data-l="en">Web application, 2026</p>
+      <h2 id="t-afc">AFC Integrata</h2>
+      <p class="lead" data-l="it">Il lavoro del mese di un ufficio amministrazione, finanza e controllo in un solo sito, con le sezioni collegate tra loro. La previsione di cassa genera i pagamenti, i pagamenti si controllano contro la regolarità dei fornitori, la banca chiude il mese.</p>
+      <p class="lead" data-l="en">The monthly work of an administration, finance and control office in one site, with every section connected. The cash forecast generates the payment run, payments are checked against each supplier's compliance, and the bank statement closes the month.</p>
+      <div class="prova">
+        <a class="bottone verde" href="https://compliance-subappalti.vercel.app" target="_blank" rel="noopener"><span data-l="it">Prova la demo</span><span data-l="en">Try the demo</span></a>
+        <p data-l="it">Dati inventati, nessuna registrazione: premi "Entra nella demo". Puoi approvare, forzare un pagamento, chiudere il mese.</p>
+        <p data-l="en">Made-up data, no sign-up: click "Entra nella demo". You can approve, force a payment, close the month. The app is in Italian.</p>
+      </div>
+
+      <div class="dettaglio">
+        <div class="corpo">
+
+          <h3 data-l="it">Prima e adesso</h3><h3 data-l="en">Before and now</h3>
+          <div data-l="it"><p>L'ho costruita sui processi che seguo ogni mese nel mio lavoro. Ogni sezione sostituisce un pezzo di lavoro che prima si faceva a mano.</p></div>
+          <div data-l="en"><p>I built it on the processes I run every month at work. Each section replaces a piece of work that used to be done by hand.</p></div>
+          <div class="parti confronto">
+            <div class="parte"><span class="num" data-l="it">Regolarità</span><span class="num" data-l="en">Compliance</span><div class="coppia">
+              <div><span class="et" data-l="it">Prima</span><span class="et" data-l="en">Before</span>
+                <p data-l="it">Un registro Excel di oltre duecento fornitori, aggiornato a mano cella per cella, e ogni pagamento incrociato a occhio con il registro.</p>
+                <p data-l="en">An Excel register of over two hundred suppliers, updated by hand cell by cell, with every payment cross-checked against it by eye.</p></div>
+              <div class="ora"><span class="et" data-l="it">Adesso</span><span class="et" data-l="en">Now</span>
+                <p data-l="it">Carico il documento e il mese risulta verificato. Per ogni pagamento l'app dice da sola se si può pagare, alla data giusta.</p>
+                <p data-l="en">I upload the document and the month is marked as verified. For every payment the app tells me whether it can go out, on the right date.</p></div></div></div>
+            <div class="parte"><span class="num" data-l="it">Pagamenti</span><span class="num" data-l="en">Payments</span><div class="coppia">
+              <div><span class="et" data-l="it">Prima</span><span class="et" data-l="en">Before</span>
+                <p data-l="it">Un foglio costruito a mano dalla previsione, controllato riga per riga, poi diviso tra direttore e tesoreria.</p>
+                <p data-l="en">A sheet built by hand from the forecast, checked line by line, then split between the finance director and treasury.</p></div>
+              <div class="ora"><span class="et" data-l="it">Adesso</span><span class="et" data-l="en">Now</span>
+                <p data-l="it">La lista nasce dalla previsione e chi non è in regola è già bloccato. Si approva con un clic e l'Excel per l'autorizzazione esce da solo. Forzare si può, ma solo scrivendo il motivo.</p>
+                <p data-l="en">The list comes straight from the forecast, with non-compliant suppliers already blocked. One click approves it and the authorisation file is generated. You can force a payment, but only by writing down why.</p></div></div></div>
+            <div class="parte"><span class="num" data-l="it">Previsione</span><span class="num" data-l="en">Forecast</span><div class="coppia">
+              <div><span class="et" data-l="it">Prima</span><span class="et" data-l="en">Before</span>
+                <p data-l="it">Un master Excel con decine di formule fragili, aggiornato a mano.</p>
+                <p data-l="en">A master Excel file with dozens of fragile formulas, updated by hand.</p></div>
+              <div class="ora"><span class="et" data-l="it">Adesso</span><span class="et" data-l="en">Now</span>
+                <p data-l="it">La stessa griglia, con le stesse formule, sul sito. Le rate dei leasing arrivano da sole dal piano dei cespiti, e quando serve si esporta in Excel.</p>
+                <p data-l="en">The same grid with the same formulas, on the site. Lease instalments flow in from the fixed-asset plan, and it exports to Excel whenever needed.</p></div></div></div>
+            <div class="parte"><span class="num" data-l="it">Chiusura</span><span class="num" data-l="en">Close</span><div class="coppia">
+              <div><span class="et" data-l="it">Prima</span><span class="et" data-l="en">Before</span>
+                <p data-l="it">I movimenti della banca riportati a mano nella previsione, i saldi controllati a mano.</p>
+                <p data-l="en">Bank transactions copied by hand into the forecast, balances checked by hand.</p></div>
+              <div class="ora"><span class="et" data-l="it">Adesso</span><span class="et" data-l="en">Now</span>
+                <p data-l="it">I movimenti si abbinano da soli, l'app mostra differenze e non pagati, il mese si chiude con un clic. Quello che non è stato pagato passa da solo al mese dopo.</p>
+                <p data-l="en">Transactions match themselves, the app shows differences and unpaid items, and the month closes in one click. Whatever wasn't paid rolls over to the next month on its own.</p></div></div></div>
+            <div class="parte"><span class="num" data-l="it">Cespiti</span><span class="num" data-l="en">Assets</span><div class="coppia">
+              <div><span class="et" data-l="it">Prima</span><span class="et" data-l="en">Before</span>
+                <p data-l="it">Le estrazioni di SAP confrontate a mano, i risultati in un report Excel.</p>
+                <p data-l="en">SAP extracts compared by hand, results in an Excel report.</p></div>
+              <div class="ora"><span class="et" data-l="it">Adesso</span><span class="et" data-l="en">Now</span>
+                <p data-l="it">Un controllo automatico ogni mese, in OIC e in IFRS 16. Anomalie e correzioni restano tracciate fino alla registrazione in SAP.</p>
+                <p data-l="en">An automatic check every month, under Italian GAAP and IFRS 16. Anomalies and corrections are tracked until they are posted in SAP.</p></div></div></div>
+            <div class="parte"><span class="num" data-l="it">Lettera</span><span class="num" data-l="en">Letter</span><div class="coppia">
+              <div><span class="et" data-l="it">Prima</span><span class="et" data-l="en">Before</span>
+                <p data-l="it">La lettera alla committenza scritta a mano in Word ogni due mesi, contratto per contratto.</p>
+                <p data-l="en">The report letter to the client written by hand in Word every two months, contract by contract.</p></div>
+              <div class="ora"><span class="et" data-l="it">Adesso</span><span class="et" data-l="en">Now</span>
+                <p data-l="it">Le righe arrivano dai certificati di avanzamento, le note si compilano da sole e il Word esce già impaginato.</p>
+                <p data-l="en">The lines come from the progress certificates, the notes fill themselves in and the Word file comes out ready.</p></div></div></div>
+          </div>
+
+          <h3 data-l="it">Cosa provare</h3><h3 data-l="en">What to try</h3>
+          <div data-l="it">
+            <ul>
+              <li>Dalla Home apri i pagamenti bloccati dalla regolarità e guarda il motivo. Prova a forzarne uno: senza scrivere il perché non si può.</li>
+              <li>Nel consuntivo assegna i movimenti rimasti, guarda lo scarto diventare "Coincidono" e approva: il mese si chiude e i non pagati passano a novembre.</li>
+              <li>Scorri la griglia, clicca una rata di leasing per vedere i contratti che la compongono, poi esportala.</li>
+              <li>Nella regolarità scorri i mesi e apri un nome: la scheda dice se oggi si può pagare, e perché.</li>
+            </ul>
+            <p>Se cambi qualcosa, in fondo al menu c'è "Rimetti la demo com'era". Ogni mattina i dati tornano comunque quelli di partenza.</p>
+          </div>
+          <div data-l="en">
+            <ul>
+              <li>From the Home page, open the payments blocked for compliance and read the reason. Try to force one: you can't without writing down why.</li>
+              <li>In the month-end actuals, assign the remaining bank transactions, watch the gap turn into "Coincidono" (matched) and approve: the month closes and unpaid items move to November.</li>
+              <li>Scroll the grid, click a lease instalment to see the contracts behind it, then export it.</li>
+              <li>In the compliance register, scroll through the months and open a name: the card tells you whether they can be paid today, and why.</li>
+            </ul>
+            <p>If you change something, "Rimetti la demo com'era" at the bottom of the menu puts it back. The data resets every morning anyway.</p>
+          </div>
+
+          <h3 data-l="it">Le regole che ho deciso</h3><h3 data-l="en">The rules I set</h3>
+          <div data-l="it">
+            <p>Il valore dell'app sta nei controlli, e i controlli li ho scritti io, partendo da come si lavora davvero.</p>
+            <ul>
+              <li>La regolarità si controlla per fornitore e per mese, al livello più alto tra i contratti che hanno lavorato quel mese.</li>
+              <li>Se il mese dei lavori non è noto, il pagamento va guardato da una persona: l'app non lo indovina.</li>
+              <li>Polizze e garanzie mancanti prima avvisano, poi bloccano da una data che decido io.</li>
+              <li>Niente si cancella: un documento sostituito resta come superato, e ogni azione ha il suo chi e quando.</li>
+              <li>Sui soldi l'AI propone, il codice controlla, la decisione resta a me.</li>
+              <li>Totali e stati si calcolano sempre dai dati, mai scritti a mano.</li>
+            </ul>
+          </div>
+          <div data-l="en">
+            <p>The value of the app is in its controls, and I wrote the controls myself, starting from how the work is really done.</p>
+            <ul>
+              <li>Compliance is checked per supplier and per month, at the highest level among the contracts that worked that month.</li>
+              <li>If the month of work is unknown, the payment goes to a person for review: the app doesn't guess.</li>
+              <li>Missing insurance policies and guarantees first raise a warning, then block from a date I set.</li>
+              <li>Nothing is deleted: a replaced document stays on file as superseded, and every action records who and when.</li>
+              <li>On money, the AI proposes, the code checks and the decision stays with me.</li>
+              <li>Totals and statuses are always calculated from the data, never typed in.</li>
+            </ul>
+          </div>
+
+          <h3 data-l="it">Come l'ho costruita</h3><h3 data-l="en">How I built it</h3>
+          <div data-l="it">
+            <p>Ho definito processi, regole di controllo e requisiti, e ho verificato i risultati. Il codice e i test li ha scritti l'AI (Claude Code), sotto la mia guida.</p>
+            <p>Prima di passare ai dati inventati della demo l'ho caricata con i dati veri e confrontata con i file di partenza: zero differenze su 354 righe della previsione di cassa, 5.267 dati su 5.267 uguali nel registro fornitori, la lettera rigenerata identica a quella vera. Ci sono 204 test automatici e una verifica di sicurezza scritta apposta per il progetto.</p>
+            <p>Nella mia versione ogni file caricato avvisa da solo il mio assistente AI, che lo legge e prepara il lavoro: il sito è lo sportello, l'assistente è l'ufficio dietro. Nella demo è spento, per privacy. Il codice resta privato, perché è nato sui dati veri del lavoro.</p>
+          </div>
+          <div data-l="en">
+            <p>I defined the processes, the control rules and the requirements, and I checked the results. The code and the tests were written by AI (Claude Code) under my direction.</p>
+            <p>Before switching to the demo's made-up data, I loaded it with real data and compared it with the source files: zero differences across 354 rows of the cash forecast, 5,267 out of 5,267 values matching in the supplier register, and the regenerated letter identical to the real one. It has 204 automated tests and a security check written specifically for the project.</p>
+            <p>In my own version, every uploaded file automatically notifies my AI assistant, which reads it and prepares the work: the site is the front desk, the assistant is the office behind it. It is switched off in the demo, for privacy. The code stays private because it was built on real work data.</p>
+          </div>
+
+          <div class="chiusura">
+            <div>
+              <h3 data-l="it">Provala</h3><h3 data-l="en">Try it</h3>
+              <p data-l="it">Entri con un clic, senza registrarti. I dati sono inventati.</p>
+              <p data-l="en">One click to get in, no sign-up. The data is made up.</p>
+            </div>
+            <a class="bottone verde" href="https://compliance-subappalti.vercel.app" target="_blank" rel="noopener"><span data-l="it">Prova la demo</span><span data-l="en">Try the demo</span></a>
+          </div>
+        </div>
+        <aside class="laterale">
+          <dl class="scheda-tecnica">
+            <dt data-l="it">Cos'è</dt><dt data-l="en">What</dt>
+            <dd data-l="it">Applicazione web</dd><dd data-l="en">Web application</dd>
+            <dt data-l="it">Sezioni</dt><dt data-l="en">Sections</dt>
+            <dd data-l="it">Previsione di cassa, pagamenti, regolarità, consuntivo, cespiti OIC e IFRS 16, lettera, archivio</dd>
+            <dd data-l="en">Cash forecast, payments, compliance, month-end close, fixed assets (OIC and IFRS 16), client letter, archive</dd>
+            <dt data-l="it">Tecnologia</dt><dt data-l="en">Stack</dt>
+            <dd>Next.js, PostgreSQL</dd>
+            <dt data-l="it">Test automatici</dt><dt data-l="en">Automated tests</dt>
+            <dd>204</dd>
+            <dt data-l="it">Lingua dell'app</dt><dt data-l="en">App language</dt>
+            <dd data-l="it">Italiano</dd><dd data-l="en">Italian</dd>
+          </dl>
+          <a class="bottone verde" href="https://compliance-subappalti.vercel.app" target="_blank" rel="noopener"><span data-l="it">Prova la demo</span><span data-l="en">Try the demo</span></a>
+        </aside>
       </div>
     </section>
 
@@ -839,8 +1006,8 @@ html[lang="en"] [data-l="it"] { display: none !important; }
           <div class="dove" data-l="it">Amministrazione, Finanza e Controllo, Desio</div><div class="dove" data-l="en">Administration, Finance &amp; Control, Desio</div>
           <p data-l="it">Il consorzio che costruisce l'autostrada Pedemontana Lombarda. Ho iniziato dal ciclo passivo e dalla verifica della regolarità contributiva dei subappaltatori; dal 2025 gestisco da solo il ciclo del leasing in IFRS 16, preso in carico da autodidatta, e oggi seguo i cespiti nel loro insieme, con le diverse forme di acquisto e finanziamento. Curo le chiusure mensili, con supporto attivo alla chiusura annuale, le riclassifiche del bilancio in chiave gestionale per la sede, il piano investimenti, il cash budgeting e lo stato patrimoniale per budget e forecast, il reporting di gruppo su HFM e il cash flow su TM1.</p>
           <p data-l="en">The consortium building the Pedemontana Lombarda motorway. I started on accounts payable and on checking subcontractors' social-security compliance; since 2025 I have run the IFRS 16 lease cycle on my own, a process I took over and taught myself, and today I look after fixed assets as a whole, across the different ways they are bought and financed. I handle the monthly close, with active support on the year-end close, the management reclassification of the financial statements for headquarters, the investment plan, the cash budget and the balance sheet for budget and forecast, the group reporting on HFM and the cash flow on TM1.</p>
-          <p data-l="it">Quando sono arrivato, la gestione era tutta manuale: fogli Excel compilati a mano, appunti su carta, cartelle disordinate. Man mano che il lavoro cresceva ho iniziato ad automatizzare con l'IA le fasi ripetitive che prendevano più tempo: prima la regolarità contributiva, poi il leasing, oggi anche il cash flow reporting, i report e la lettera alla committente, riuniti in un'applicazione che ho progettato. Ora quasi tutto passa dall'assistente AI, e il tempo recuperato lo dedico all'analisi e allo studio.</p>
-          <p data-l="en">When I arrived, everything was run by hand: manually filled Excel sheets, paper notes, messy folders. As the work grew, I started automating with AI the repetitive steps that took the most time: first the compliance checks, then leasing, and now cash flow reporting, reports and the letter to the client, brought together in an application I designed. Today almost everything runs through the AI assistant, and I spend the time saved on analysis and study.</p>
+          <p data-l="it">Quando sono arrivato, la gestione era tutta manuale: fogli Excel compilati a mano, appunti su carta, cartelle disordinate. Man mano che il lavoro cresceva ho iniziato ad automatizzare con l'IA le fasi ripetitive che prendevano più tempo: prima la regolarità contributiva, poi il leasing, oggi anche il cash flow reporting, i report e la lettera alla committente, riuniti in <a href="#lavori/afc">un'applicazione che ho progettato</a>. Ora quasi tutto passa dall'assistente AI, e il tempo recuperato lo dedico all'analisi e allo studio.</p>
+          <p data-l="en">When I arrived, everything was run by hand: manually filled Excel sheets, paper notes, messy folders. As the work grew, I started automating with AI the repetitive steps that took the most time: first the compliance checks, then leasing, and now cash flow reporting, reports and the letter to the client, brought together in <a href="#lavori/afc">an application I designed</a>. Today almost everything runs through the AI assistant, and I spend the time saved on analysis and study.</p>
           <p data-l="it">Insieme a un collega ho ridisegnato una struttura più pulita e ordinata per la gestione generale: oggi in due seguiamo quasi tutto l'ufficio, lui la parte contabile e io quella finanziaria.</p>
           <p data-l="en">Together with a colleague, I rebuilt a cleaner, more orderly structure for the office's day-to-day management: today the two of us run almost the whole office, with him on accounting and me on finance.</p>
         </div>
